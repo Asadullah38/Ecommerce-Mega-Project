@@ -4,6 +4,3 @@ mongoose
   .then((data) => {
     console.log(`Connected to MongoDB on Port ${data.connection.port}`);
   })
-  .catch((err) => {
-    console.log(err);
-  });
