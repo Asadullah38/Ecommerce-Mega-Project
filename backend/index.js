@@ -20,7 +20,6 @@ app.use(express.json());
 app.use(router);
 dotenv.config({ path: "backend/config/config.env" });
 app.use(errorMiddleware);
-app.use(asyncMiddleware);
 
 //Unhandled Promise Rejection
 process.on("unhandledRejection", (err) => {
