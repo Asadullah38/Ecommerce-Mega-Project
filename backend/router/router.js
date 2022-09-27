@@ -1,6 +1,6 @@
 const express= require('express');
 const { getAllProducts, createProduct,updateProduct ,deleteProduct, getSingleProduct} = require('../controllers/productControllers');
-const { createUser, loginUser,logout } = require('../controllers/userControllers');
+const { createUser, loginUser,logout, forgotPassword, resetPassword } = require('../controllers/userControllers');
 const { isUserAuthenticated,userRoleCheck } = require('../middleware/auth');
 const router = express.Router();
 
@@ -14,5 +14,7 @@ router.route("/product/:id").put(isUserAuthenticated,userRoleCheck("admin"),upda
 router.post("/createUser",createUser);
 router.post("/loginUser",loginUser);
 router.route("/logout").get(logout);
+router.route("/password/forgot").put(forgotPassword);
+router.route("/password/reset/:token").put(resetPassword);
 
 module.exports = router;

@@ -1,5 +1,6 @@
-const dotenv = require("dotenv");
 const express = require("express");
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, './config/.env') })
 const bodyParser = require("body-parser");
 const app = express();
 const router = require("./router/router");
@@ -26,7 +27,6 @@ app.use(cors);
 //Error Middleware for Messages
 
 app.use(errorMiddleware);
-
 //Unhandled Promise Rejection
 process.on("unhandledRejection", (err) => {
   console.log(`Error: ${err.message}`);
@@ -37,5 +37,5 @@ process.on("unhandledRejection", (err) => {
 });
 
 const server = app.listen(5000, () => {
-  console.log("listening on port", 5000);
+  console.log("listening on port", process.env.PORT);
 });

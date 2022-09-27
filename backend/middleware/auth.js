@@ -13,7 +13,6 @@ exports.isUserAuthenticated = catchAsyncErrors(async (req, res, next) => {
   next();
 });
 
-
 //Role check Pass
 exports.userRoleCheck = (role) => {
   return (req, res, next) => {
@@ -24,4 +23,8 @@ exports.userRoleCheck = (role) => {
         new ErrorHandler(
           `You as a ${req.user.role} cannot access this page`,
           403
-        ));}};};
+        )
+      );
+    }
+  };
+};
