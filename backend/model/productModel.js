@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const productSchema = mongoose.Schema({
+  
   name: {
     type: String,
     required: [true, "Please Enter a Product Name."],
@@ -16,7 +17,7 @@ const productSchema = mongoose.Schema({
     maxLength: [8, "Please Enter a price less than 8 digits."],
   },
 
-  rating: {
+  ratings: {
     type: Number,
     default: 0,
   },
@@ -53,6 +54,11 @@ const productSchema = mongoose.Schema({
 
   reviews: [
     {
+      userID: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: true,
+      },
       name: {
         type: String,
         required: true,
@@ -63,7 +69,6 @@ const productSchema = mongoose.Schema({
       },
       comment: {
         type: String,
-        required: true,
       },
     },
   ],

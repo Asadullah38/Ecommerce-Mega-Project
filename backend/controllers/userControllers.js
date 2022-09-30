@@ -33,8 +33,9 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   sendToken(foundUser, 200, req, res);
 });
 
-
-//=================== LOGOUT USER ==========================
+// =====================================================================
+//=================== LOGOUT USER ======================================
+// =====================================================================
 exports.logout = catchAsyncErrors(async (req, res, next) => {
   res.clearCookie("jwtToken");
   res.status(200).json({
@@ -43,8 +44,9 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-
-//=================Request Reset Email====================
+// =====================================================================
+//=================Request Reset Email==================================
+// =====================================================================
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   //Find Email Address
   const foundUser = await user.findOne({ email: req.body.email });
@@ -81,10 +83,11 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-
+// =====================================================================
 //===============Reset Password after clicking the link=================
+// =====================================================================
 exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
-  //descrypt token hash
+  //decrypt token hash
   const token = crypto.createHash("sha256").update(req.params.token).digest("hex");
 
   //finding token from tokens list
@@ -104,5 +107,131 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   await resetTokenModel.deleteOne({ token });
   //creating jwt token and storing it.
   sendToken(foundUser, 200, req, res);
+})
 
+
+//Get User Details
+exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
+  const loggedInUser = await user.findById(req.user.id);
+  res.status(200).json({
+    success: true,
+    loggedInUser
+  });
+})
+
+
+//Update Password if user Remembers and is Logged In.
+exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
+  const loggedInUser = await user.findById(req.user.id).select("+password");
+  const isPasswordMatched = await loggedInUser.comparePassword(req.body.oldPassword);
+
+
+  if (!isPasswordMatched) {
+    return next(new ErrorHandler("Old password is Incorrect.", 400));
+  }
+  if (req.body.newPassword === req.body.oldPassword) {
+    return next(new ErrorHandler("Old password and new Password Should not be same.", 400));
+  }
+  if (req.body.newPassword !== req.body.confirmPassword) {
+    return next(new ErrorHandler("Passwords Do not Match.", 400));
+  }
+
+  loggedInUser.password = req.body.newPassword;
+  await loggedInUser.save();
+
+  sendToken(loggedInUser, 200, req, res);
+})
+
+
+//Update profile if user is Logged In.
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+  const loggedInUser = await user.findById(req.user.id);
+
+  const newData = {
+    name: req.body.name,
+  }
+  if (!req.body.name) {
+    return next(new ErrorHandler(`Enter New Name.`, 400));
+  }
+  const updatedUser = await user.findByIdAndUpdate(req.user.id, newData, { new: true, runValidators: true, useFindAndModify: false });
+
+  res.status(200).json({
+    success: true,
+    message: "Name Updated successfully"
+  });
+})
+
+//Get All users Data for Admin
+exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
+  const allUsers = await user.find();
+  res.status(200).json({
+    success: true,
+    allUsers
+  });
+})
+
+
+// =====================================================================
+//Get Single User Details for Admin
+// =====================================================================
+
+exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
+  const findUser = await user.findById(req.params.id);
+  if (!findUser) {
+    return next(new ErrorHandler(`User Not Found with Id ${req.params.id}`, 404));
+  }
+  res.status(200).json({
+    success: true,
+    findUser,
+  });
+});
+
+
+// =====================================================================
+//==========Remove a User.====================
+// =====================================================================
+exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
+  const findUser = await user.findById(req.params.id);
+  if (!findUser) {
+    return next(new ErrorHandler("User Not Found", 404));
+  }
+  //Will Add cloudinary later.
+  const deletedUser = await findUser.remove();
+  res.status(201).json({
+    success: true,
+    deletedUser,
+    message: "User Deleted Successfully"
+  });
+});
+
+// =====================================================================
+//Admin Updating role of User with the email.
+// =====================================================================
+exports.updateRole = catchAsyncErrors(async (req, res, next) => {
+
+
+
+  if (!req.body.email || !req.body.role || req.body.name) {
+    return next(new ErrorHandler(`Provide Complete Data.`, 400));
+  }
+
+  const foundUser = await user.findOne({ email: req.body.email });
+  if (!foundUser) {
+    return next(new ErrorHandler(`User Not Found.`, 400));
+  }
+  if (foundUser.role === req.body.role) {
+    return next(new ErrorHandler(`User ${req.body.email} Already has ${req.body.role} Role.`, 400));
+  }
+
+
+  const newData = {
+    role: req.body.role,
+  }
+
+  const updatedUser = await user.findOneAndUpdate({ email: req.body.email }, newData, { new: true, runValidators: true, useFindAndModify: false });
+
+  res.status(200).json({
+    success: true,
+    message: `User ${req.body.email}'s role Successfully Updated to ${req.body.role}`
+  });
 })
