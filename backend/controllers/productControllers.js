@@ -124,6 +124,7 @@ exports.reviewProduct = catchAsyncErrors(async (req, res, next) => {
     foundProduct.reviews.push(review);
     foundProduct.numOfReviews = foundProduct.reviews.length;
   }
+  
   //if already rated by user
   else {
     foundProduct.reviews.forEach(review => {
