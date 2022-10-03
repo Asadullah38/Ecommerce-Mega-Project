@@ -1,0 +1,334 @@
+#a1 {
+  text-decoration: none;
+  color: white;
+}
+
+.a {
+  text-decoration: none;
+  color: black;
+}
+
+#logo {
+  width: 150px;
+  height: 50px;
+}
+
+.row1 {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  justify-content: center;
+  background: radial-gradient(#fff, #ffd6d6);
+}
+
+.col1 {
+  margin-bottom: 50px;
+}
+
+.col1 img {
+  position: relative;
+  margin-bottom: 50px;
+  height: 500px;
+  flex-basis: 80%;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.col img {
+  max-width: 100%;
+}
+
+#p {
+  font-size: 20px;
+}
+
+.explore {
+  color: white !important;
+  background: #ff5349;
+  width: 170px;
+  height: 40px;
+  font-size: 25px;
+  border-radius: 50px;
+  transition: all 0.4s;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.bu {
+  display: none;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+#but {
+  color: white !important;
+}
+
+.explore:hover {
+  background: black;
+}
+
+.explore:hover .bu {
+  display: inline-block;
+  opacity: 1;
+}
+
+.header {
+  background: radial-gradient(#fff, #ffd6d6);
+}
+
+.fpro {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#hr {
+  background: orange;
+  width: 100px;
+  height: 5px;
+  border-radius: 50px;
+  border: none;
+  margin-top: 10px;
+}
+
+#as {
+  color: white;
+}
+
+.fa {
+  color: orange;
+}
+
+.name {
+  font-size: 30px;
+}
+
+.price {
+  font-size: 20px;
+}
+
+#Facebook {
+  color: blue;
+}
+
+#Twitter {
+  color: #00aced;
+}
+#Youtube {
+  color: #bb0000;
+}
+#Instagram {
+  color: #bc2a8d;
+}
+#Github {
+  color: aqua;
+}
+
+.h2 {
+  font-size: 50px;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: wrap;
+  align-content: center;
+  justify-content: space-evenly;
+  margin-bottom: 50px;
+}
+
+.c1 {
+  margin-left: 5%;
+}
+
+.c4 {
+  margin-right: 5%;
+}
+
+.c1 img {
+  height: 40px;
+  width: 120px;
+  margin-top: 30px;
+}
+
+#fp2 {
+  opacity: 0.7;
+}
+
+.footer {
+  margin-top: 2%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: space-evenly;
+  bottom: 0;
+}
+
+#ul {
+  list-style: none;
+}
+
+.lis {
+  opacity: 0.7;
+}
+
+#lin {
+  width: 70%;
+  margin-top: 30px;
+  margin-left: 15%;
+}
+
+#f2 {
+  text-align: center;
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+.foot {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background: black;
+  color: white;justify-content: space-between;
+  align-items: center;
+  padding-bottom: 100px;
+}
+
+#l {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c2 {
+  justify-content: center;
+}
+
+.links {
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+}
+.links:hover {
+  color: aqua;
+}
+.li2 {
+  display: block;
+  border: 1px solid black;
+  padding: 5px;
+  width: 98%;
+  transition: all 0.4s;
+  background: white;
+  color: black;
+}
+
+.li2:hover {
+  cursor: pointer;
+  transform: translateY(-3px);
+  width: 100%;
+  background: orange;
+}
+
+
+.fa-bars:hover {
+  cursor: pointer;
+  color: white;
+}
+
+.a3 {
+  text-decoration: none;
+  color: black;
+}
+#fh2{
+  margin-bottom: 10px;
+}
+@media only screen and (max-width: 950px) {
+  .col1 img {
+    height: 250px;
+  }
+  .c2 img {
+    height: 80px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .col1 img {
+    height: 250px;
+  }
+  .c2 img {
+    height: 80px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .links {
+    font-size: 12px;
+  }
+  #fh2 {
+    font-size: 20px;
+
+  }
+  .logofooter {
+    max-height: 50px;
+    width: 130px;
+  }
+}
+
+@media only screen and (max-width: 670px) {
+  .h2 {
+    font-size: 30px;
+  }
+  #p {
+    font-size: 15px;
+  }
+  .links {
+    font-size: 12px;
+  }
+  #fh2 {
+    font-size: 20px;
+  }
+  #fp2 {
+    font-size: 12px;
+  }
+  .logofooter {
+    max-height: 30px;
+    width: 100px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .h2 {
+    font-size: 20px;
+  }
+  #p {
+    font-size: 10px;
+  }
+  #hr {
+    margin-top: 0;
+  }
+  .h2 {
+    font-size: 30px;
+  }
+  #p {
+    font-size: 15px;
+  }
+  .links {
+    font-size: 12px;
+  }
+  #fh2 {
+    font-size: 20px;
+  }
+  #fp2 {
+    font-size: 12px;
+  }
+  .logofooter {
+    padding: 0px 100px 0px 100px;
+    max-height: 30px;
+    width: 100px;
+  }
+}
