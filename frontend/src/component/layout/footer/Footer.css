@@ -161,6 +161,8 @@
 
 .footer {
   margin-top: 2%;
+  margin-right: 10%;
+  margin-left: 10%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -197,7 +199,7 @@
   color: white;justify-content: space-between;
   align-items: center;
   padding-bottom: 100px;
-}
+padding-top:50px ;}
 
 #l {
   display: flex;
