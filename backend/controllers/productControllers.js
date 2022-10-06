@@ -7,11 +7,11 @@ const apiFeatures = require("../utils/apiFeatures");
 
 
 // =====================================================================
-//==========Get All Products====================
+//============================Get All Products==========================
 // =====================================================================
 exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const productCount = await product.countDocuments();
-  const apiFeature = new apiFeatures(product.find(), req.query).search().filter().pagination(5);
+  const apiFeature = new apiFeatures(product.find(), req.query).search().filter().pagination(6);
   const allProducts = await apiFeature.query;
 
   res.status(200).json({

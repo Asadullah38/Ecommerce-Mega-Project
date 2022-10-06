@@ -6,54 +6,49 @@ import Product from "./Product.jsx";
 import MetaData from '../layout/MetaData';
 import { useDispatch, useSelector } from "react-redux"
 import { getProduct } from '../../actions/productActions';
-import axios from 'axios';
+import Loader from '../layout/Loader/Loader';
 
 const Home = () => {
     const dispatch = useDispatch();
 
-    const product = {
-        images: [{ url: "https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHNoaXJ0fGVufDB8fDB8fA%3D%3D&w=1000&q=80" }],
-        name: "Blue T-Shirt",
-        price: "10.00$",
-        _id: "asad"
-    }
 
 
     useEffect(() => {
-      dispatch(getProduct())
-
+        dispatch(getProduct())
     }, [dispatch])
 
+    const { loading, product, productCount } = useSelector(state => state.products);
+    console.log(loading);
 
+    return (
+        <>
+            {!loading ?
+                <Fragment>
+                    <Loader />
+                </Fragment> : <>
+                    <MetaData title="Ecommerce Red Store" />
+                    <div className="banner">
+                        <p>
+                            Welcome to Ecommerce Red Store
+                        </p>
+                        <h1>
+                            FIND AMAZING {product ? product.length : null} PRODUCTS BELOW
+                        </h1>
+                        <a href="#container">
+                            <button >scroll <CgMouse /></button>
+                        </a>
+                    </div>
 
-    return (<>
-        <MetaData title="Ecommerce Red Store" />
-        <div className="banner">
-            <p>
-                Welcome to Ecommerce Red Store
-            </p>
-            <h1>
-                FIND AMAZING PRODUCTS BELOW
-            </h1>
-            <a href="#container">
-                <button >scroll <CgMouse /></button>
-            </a>
-        </div>
-        <h2 className="homeHeading">Featured Products</h2>
-
-        <div className="container" id="container">
-            <Product product={product} />
-            <Product product={product} />
-            <Product product={product} />
-            <Product product={product} />
-            <Product product={product} />
-            <Product product={product} />
-        </div>
-        {/* Footer */}
-        <div id='footerdiv'>
-            <Footer />
-        </div>
-    </>
+                    <h2 className="homeHeading">Featured Products</h2>
+                    <div className="container" id="container">
+                        {product && product.map((item, key) => { return <Product product={item} key={item._id} /> })}
+                    </div>
+                    {/* Footer */}
+                    <div id='footerdiv'>
+                        <Footer />
+                    </div>
+                </>}
+        </>
     )
 }
 

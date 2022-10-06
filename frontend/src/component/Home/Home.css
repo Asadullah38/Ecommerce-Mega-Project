@@ -77,24 +77,60 @@
 }
 
 .ProductCard {
-  font-weight:
-   800;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 800;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   transition: all 0.3s ease;
   margin-bottom: 20px;
-padding: 40px;
+  padding: 20px;
 }
-.ProductCard>img{
-    height: 300px;
-    transition: all 0.1s ease;
+.ProductCard > img {
+  padding-bottom: 50px;
+  height: 200px;
+  width: 300px;
+  transition: all 0.1s ease;
 }
-.ProductCard:hover{
-    transform: translateY(-1vmax);
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+.ProductCard:hover {
+  transform: translateY(-1vmax);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+#container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+
+
+/* Loader */
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 8px;
+  box-sizing: border-box;
+  border: 32px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
-#container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content:space-evenly;
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
 }
