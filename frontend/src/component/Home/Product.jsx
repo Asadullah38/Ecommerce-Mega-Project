@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ReactStars from "react-rating-stars-component";
-import image from "../../images/camera 1.jpg";
 const Product = ({ product }) => {
     const options = {
         edit: false,
@@ -15,10 +14,10 @@ const Product = ({ product }) => {
     }
     return (
         <div>
-            <Link style={{ textDecoration: "none", color: "black" }} to={product._id}>
+            <Link style={{ textDecoration: "none", color: "black" }} to={`product/${product._id}`}>
                 <div className="ProductCard">
                     <img id={product._id} src={product.images[0].url} style={{ objectFit: "contain" }} alt={product.name} />
-                    <p>{product.name}</p>
+                    <p id='nameofProduct'>{product.name}</p>
                     <div><ReactStars {...options} /><span> {product.numOfReviews} reviews </span></div>
                     <span>{product.price} $</span>
                 </div>
