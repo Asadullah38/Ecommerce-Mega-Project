@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const productSchema = mongoose.Schema({
-  
+
   name: {
     type: String,
     required: [true, "Please Enter a Product Name."],
@@ -70,6 +70,8 @@ const productSchema = mongoose.Schema({
       comment: {
         type: String,
       },
+      avatar: 
+      { type: String, required: true }
     },
   ],
 

@@ -10,7 +10,6 @@ const Product = ({ product }) => {
         size: window.innerWidth < 600 ? 20 : 25,
         isHalf: true,
         backgroundColor: "rgba(255, 255, 255, 0.5)",
-
     }
     return (
         <div>

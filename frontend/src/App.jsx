@@ -1,14 +1,13 @@
 import "./App.css";
 import React from "react";
-import { useSelector } from "react-redux";
 import { BrowserRouter, Routes, Route, } from "react-router-dom"; import Header from "./component/layout/Header.css/Header.jsx";
 import Home from "./component/Home/Home.jsx";
 import webfonts from "webfontloader";
 import ProductDetails from "./component/layout/ProductDetails/ProductDetails";
 
+
+
 function App() {
-
-
   React.useEffect(() => {
     webfonts.load({
       google: {

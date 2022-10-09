@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Product from "./Product.jsx";
 import MetaData from '../layout/MetaData';
 import { CgMouse } from "react-icons/cg"
 import ReactAlerts from '../layout/Alerts/ReactAlerts';
-
+import ReactSlider from "react-slider";
+import Typography from "react-typography";
 
 const LandingPage = ({ data }) => {
 
-    const { loading, product, error, productCount } = data;
+    const { product, error } = data;
 
-    console.log(product)
     return (
 
         <>
@@ -28,6 +28,11 @@ const LandingPage = ({ data }) => {
             </div>
 
             <h2 className="homeHeading">Featured Products</h2>
+            <center>
+                <div id="react-slider">
+                    
+                </div>
+            </center>
             <div className="container" id="container">
                 {product && product.map((item, key) => { return <Product product={item} key={item._id} /> })}
             </div>

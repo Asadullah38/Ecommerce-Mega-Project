@@ -91,18 +91,20 @@ exports.getSingleProduct = catchAsyncErrors(async (req, res, next) => {
 // =====================================================================
 exports.reviewProduct = catchAsyncErrors(async (req, res, next) => {
 
-  const { rating, comment, productId } = req.body;
 
+  const { rating, comment, productId } = req.body;
   //Your review
   const review = {
     userID: req.user.id,
     name: req.user.name,
+    avatar: req.user.avatar.url,
     rating: Number(rating),
     comment
   }
+  console.log(review.avatar);
   //finding the product
   const foundProduct = await product.findById(productId);
-
+  
   //Error Handling
   if (!foundProduct) {
     return next(new ErrorHandler("Product Not Found.", 400))
@@ -124,13 +126,14 @@ exports.reviewProduct = catchAsyncErrors(async (req, res, next) => {
     foundProduct.reviews.push(review);
     foundProduct.numOfReviews = foundProduct.reviews.length;
   }
-  
+
   //if already rated by user
   else {
     foundProduct.reviews.forEach(review => {
       if (review.userID.toString() === req.user.id) {
         review.rating = rating;
         review.comment = comment;
+        review.avatar=req.user.avatar.url;
       }
     })
   }
@@ -145,6 +148,7 @@ exports.reviewProduct = catchAsyncErrors(async (req, res, next) => {
   foundProduct.ratings = sumofReviews / foundProduct.reviews.length;
   foundProduct.numOfReviews = foundProduct.reviews.length;
   //Saving Data
+  console.log(foundProduct);
   await foundProduct.save();
 
   //sending response

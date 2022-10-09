@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReactAlert from "reactjs-alert";
-
 const ReactAlerts = ({ error, type, title, quoteString }) => {
+    
     const [status, setStatus] = useState(false)
     const options = {
         status: error, // true or false
@@ -13,7 +13,8 @@ const ReactAlerts = ({ error, type, title, quoteString }) => {
         button: "close",
     }
     return (
-        <div>{error ? <ReactAlert
+        <div>
+            {error ? <ReactAlert
             {...options}
             Close={() => setStatus(false)} /> : null}</div>
     )

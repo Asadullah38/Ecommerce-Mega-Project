@@ -23,6 +23,9 @@
     "nodemon": "^2.0.20",
     "react-alert": "^7.0.3",
     "react-alert-template-basic": "^1.0.2",
+    "react-slider": "^2.0.4",
+    "react-typography": "^0.16.20",
+    "rn-range-slider": "^2.2.2",
     "validator": "^13.7.0"
   }
 }

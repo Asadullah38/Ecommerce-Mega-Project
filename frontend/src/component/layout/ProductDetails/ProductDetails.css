@@ -9,6 +9,7 @@
 
 #Carousel {
   cursor: pointer;
+  margin-top: 50px;
   height: 35%;
   width: 35%;
 }
@@ -57,6 +58,7 @@
 
 #CartButton {
   padding: 10px;
+  cursor: pointer;
   transition: all 0.3s ease;
   color: white;
   border: 0.4px solid black;
@@ -94,7 +96,10 @@ h2 {
   transition: background 0.6s ease;
   border-radius: 10px;
   padding: 20px 20px 30px 20px;
+}
+.wrapper:hover {
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 .wrapper .profile {
   margin-top: 2.2em;
@@ -109,14 +114,17 @@ h2 {
   background: #e9eff6;
 }
 .wrapper .profile .thumbnail {
-  width: 124px;
-  height: 124px;
   display: flex;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1.5em;
-  border-radius: 100%;
+  border-radius: 50%;
   box-shadow: 0 13px 26px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+  height: 150px;
+  padding: 10px;
+}
+.MultiCarousel {
+  text-align: center;
 }
 .wrapper .profile .name {
   color: #2d354a;
@@ -138,6 +146,9 @@ h2 {
   justify-content: center;
   align-items: center;
 }
+
+
+
 @media screen and (max-width: 1180px) {
   #ReviewStars {
     margin: 2% 0% 2% 0%;
