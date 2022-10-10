@@ -72,7 +72,7 @@ const ProductDetails = () => {
                             <h2 id='ProductTitle'>{product.name}</h2>
                             <hr />
                             <div id="ReviewStars">
-                                <ReactStars {...options} value={product.ratings} />
+                                <ReactStars {...options} value={product && product.ratings} />
                                 <h2 className='HomeHeading' id='HomeHeading'>&nbsp;&nbsp; {product.ratings.toPrecision(2)}  Ratings</h2>
                             </div>
                             <hr />

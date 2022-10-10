@@ -14,11 +14,10 @@ const Home = () => {
 
 
     const data = useSelector(state => state.products);
-    const { loading } = data;
-    console.log(loading)
+    const { loading,products } = data;
     return (
         <>
-            {loading ? <Loader /> : <LandingPage data={data} />}
+            {loading ? <Loader /> :<LandingPage data={data} />}
         </>
     )
 }

@@ -11,13 +11,15 @@ const apiFeatures = require("../utils/apiFeatures");
 // =====================================================================
 exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const productCount = await product.countDocuments();
-  const apiFeature = new apiFeatures(product.find(), req.query).search().filter().pagination(6);
+  const apiFeature = new apiFeatures(product.find(), req.query).search().filter().pagination(2);
   const allProducts = await apiFeature.query;
+  const pageNo = Number(apiFeature.queryString.page);
 
   res.status(200).json({
     success: true,
+    pageNo,
     allProducts,
-    productCount
+    productCount,
   });
 });
 
@@ -104,7 +106,7 @@ exports.reviewProduct = catchAsyncErrors(async (req, res, next) => {
   console.log(review.avatar);
   //finding the product
   const foundProduct = await product.findById(productId);
-  
+
   //Error Handling
   if (!foundProduct) {
     return next(new ErrorHandler("Product Not Found.", 400))
@@ -133,7 +135,7 @@ exports.reviewProduct = catchAsyncErrors(async (req, res, next) => {
       if (review.userID.toString() === req.user.id) {
         review.rating = rating;
         review.comment = comment;
-        review.avatar=req.user.avatar.url;
+        review.avatar = req.user.avatar.url;
       }
     })
   }
