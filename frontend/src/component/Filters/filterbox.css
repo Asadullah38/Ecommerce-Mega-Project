@@ -1,6 +1,6 @@
 .price-interval-slider {
   height: 5px;
-  width: 30%;
+  width: 80%;
   margin-bottom: 25px;
   background-color: orange;
   cursor: pointer;
@@ -16,7 +16,7 @@
 
 #minspan {
   user-select: none;
-  margin-right: 10%;
+  margin-right: 30%;
   padding: 10px;
   color: cornsilk;
   background-color: black;
@@ -24,7 +24,7 @@
 }
 
 #maxspan {
-  margin-left: 14%;
+  margin-left: 30%;
   user-select: none;
   padding: 10px;
   color: cornsilk;
@@ -44,7 +44,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 .button2 {
-cursor: pointer;
+  cursor: pointer;
   position: relative;
   display: inline-block;
   padding: 15px 30px;
@@ -59,9 +59,18 @@ cursor: pointer;
   border: 2px solid #d2bdff;
   transition: all 0.1s linear;
 }
+.button2:hover #categoryhead {
+  border: 1px solid transparent;
+  color: white;
+}
+
 .button2:hover {
   border: 1px solid transparent;
+  color: white;
+  border: 3px solid black;
+  background-color: cornflowerblue;
 }
+
 .button2:hover span {
   position: absolute;
   display: block;
@@ -143,16 +152,18 @@ cursor: pointer;
   }
 }
 
-
-
+#categoryhead {
+  font-size: 20px;
+  color: #3a86ff;
+}
 
 .box select {
-    cursor: pointer;
+  cursor: pointer;
   background-color: #0563af;
   color: white;
   padding: 12px;
-  width: 250px;
-  border: none;
+  width: 170px;
+  border: 3px solid black;
   font-size: 20px;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
   -webkit-appearance: button;
@@ -163,7 +174,7 @@ cursor: pointer;
 .box::before {
   content: "\f13a";
   font-family: FontAwesome;
-  width: 20%;
+  width: 30%;
   height: 100%;
   text-align: center;
   font-size: 28px;
@@ -180,4 +191,71 @@ cursor: pointer;
 
 .box select option {
   padding: 30px;
+}
+
+#FilterBox {
+  transition: all 2s ease-in-out;
+  width: 40%;
+  padding: 50px;
+  border: 2px solid #0563af;
+}
+@media (max-width: 768px) {
+  #categoryhead {
+    font-size: 20px;
+  }
+
+  .box select {
+    width: 150px;
+    font-size: 15px;
+  }
+  #FilterBox {
+    width: 60%;
+  }
+}
+
+@media (max-width: 430px) {
+  #categoryhead {
+    font-size: 13px;
+  }
+
+  .box select {
+    width: 100px;
+    font-size: 13px;
+    padding: 5px;
+  }
+  #FilterBox {
+    width: 50%;
+  }
+}
+
+@media (max-width: 425px) {
+  #categoryhead {
+    font-size: 11px;
+    padding: 0px;
+  }
+
+  .button2 {
+    margin-top: 20px;
+    font-size: 10px;
+    width: 60px;
+    padding: 5px;
+    margin: 10px;
+  }
+  .box select {
+    width: 50px;
+    font-size: 8px;
+    padding: 0px;
+  }
+  #FilterBox {
+    width: 50%;
+  }
+  #minspan {
+    font-size: 12px;
+  }
+  #maxspan {
+    font-size: 12px;
+  }
+  #ratingspan {
+    font-size: 12px;
+  }
 }

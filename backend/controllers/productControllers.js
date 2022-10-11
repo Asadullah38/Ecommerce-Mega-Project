@@ -14,12 +14,13 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const apiFeature = new apiFeatures(product.find(), req.query).search().filter().pagination(2);
   const allProducts = await apiFeature.query;
   const pageNo = Number(apiFeature.queryString.page);
-
+const queries=req.query;
   res.status(200).json({
     success: true,
     pageNo,
     allProducts,
     productCount,
+    queries
   });
 });
 
