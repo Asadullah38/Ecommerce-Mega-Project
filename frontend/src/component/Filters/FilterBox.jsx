@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import "./filterbox.css";
 import ReactSlider from "react-slider";
-import { useDispatch, useSelector } from 'react-redux';
-import { getProduct } from '../../actions/productActions';
 
 const FilterBox = ({ min, max, setmin, setmax, ratingAbove, setRatingsAbove, category, setCategory, applyFilterAndSearch }) => {
 
@@ -12,7 +10,7 @@ const FilterBox = ({ min, max, setmin, setmax, ratingAbove, setRatingsAbove, cat
 
   return (
     <div>
-      <div className="button2" onClick={() => setfiltermode(!filtermode)}><span></span><span></span><span></span><span></span>{filtermode ? `Hide` : `Add`} Filters</div>
+      <div className="button2" onClick={() => { setfiltermode(!filtermode) }}><span></span><span></span><span></span><span></span>{filtermode ? `Hide` : `Add`} Filters</div>
       {filtermode ? (
         <div id='FilterBox'>
           <h1 id="categoryhead" style={{ fontFamily: "sans-serif", marginBottom: "30px", padding: "10px", border: "1px solid black", width: "50%" }}>Price Range (Rs.)</h1>
@@ -53,7 +51,7 @@ const FilterBox = ({ min, max, setmin, setmax, ratingAbove, setRatingsAbove, cat
                 <h1 id='categoryhead'>Select Category</h1>
                 <br />
                 <select value={category} onChange={(e) => { setCategory(e.target.options[e.target.selectedIndex].text); }}>
-                  <option value={"category"}>Category</option>
+                  <option value={"category"}>All</option>
                   {catarray.map((item, index) => {
                     return <option key={index} value={item}>{item}</option>
                   })}

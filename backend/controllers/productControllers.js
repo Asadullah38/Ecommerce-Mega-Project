@@ -11,10 +11,10 @@ const apiFeatures = require("../utils/apiFeatures");
 // =====================================================================
 exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const productCount = await product.countDocuments();
-  const apiFeature = new apiFeatures(product.find(), req.query).search().filter().pagination(2);
+  const apiFeature = new apiFeatures(product.find(), req.query).search().filter().pagination(4);
   const allProducts = await apiFeature.query;
   const pageNo = Number(apiFeature.queryString.page);
-const queries=req.query;
+  const queries = req.query;
   res.status(200).json({
     success: true,
     pageNo,

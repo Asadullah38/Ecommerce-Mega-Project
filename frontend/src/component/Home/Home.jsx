@@ -14,7 +14,7 @@ const Home = () => {
 
 
     const data = useSelector(state => state.products);
-    const { loading,products } = data;
+    const { loading} = data;
     return (
         <>
             {loading ? <Loader /> :<LandingPage data={data} />}

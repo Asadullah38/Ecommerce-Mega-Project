@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import Product from "./Product.jsx";
+import Product from "../Home/Product";
 import MetaData from '../layout/MetaData';
 import { CgMouse } from "react-icons/cg"
 import ReactAlerts from '../layout/Alerts/ReactAlerts';
 import Pagination, { bootstrap5PaginationPreset } from "react-responsive-pagination";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getProduct } from '../../actions/productActions';
 import FilterBox from '../Filters/FilterBox.jsx';
-import Loader from '../layout/Loader.jsx/Loader.jsx';
 
 
 
-const LandingPage = ({ data }) => {
+const ProductsPage = ({ data }) => {
     const dispatch = useDispatch();
+
+    const { product, error, pageNo, queries } = data;
     const [currentPage, setCurrentPage] = useState(1);
-    const { product, error, pageNo, queries, loading } = data;
+
     useEffect(() => {
         setCurrentPage(pageNo);
     }, [])
 
-
     // Filter Box States
-
     let [min, setmin] = useState(queries && queries.price.gte);
+    let [keyword, setkeyword] = useState(queries && queries.keyword);
     let [max, setmax] = useState(queries && queries.price.lte);
     let [ratingAbove, setRatingsAbove] = useState(queries && queries.ratings.gte);
     let [category, setCategory] = useState(queries && queries.category);
@@ -30,7 +30,7 @@ const LandingPage = ({ data }) => {
     //Pagination
     function handlePageChange(page) {
         setCurrentPage(page);
-        dispatch(getProduct(page, min, max, ratingAbove, category));
+        dispatch(getProduct(page, min, max, ratingAbove, category, keyword));
         if (product.length >= 1) {
             window.scrollTo({ top: 675, behavior: 'smooth' })
         }
@@ -41,13 +41,14 @@ const LandingPage = ({ data }) => {
 
     //applyFilterAndSearch
     function applyFilterAndSearch() {
-        dispatch(getProduct(currentPage, min, max, ratingAbove, category));
+        dispatch(getProduct(currentPage, min, max, ratingAbove, category,keyword));
     }
 
 
     return (
 
-        <>{loading ? <Loader /> : <>
+        <>
+
             <ReactAlerts error={error} type="error" title="Timed out" quoteString="Connection Timed out. Items Loading unsuccessful." />
             <MetaData title="Ecommerce Red Store" />
             <div className="banner">
@@ -58,7 +59,7 @@ const LandingPage = ({ data }) => {
                     FIND AMAZING {product ? product.length : null} PRODUCTS BELOW
                 </h1>
                 <a href="#container">
-                    <button >scroll <CgMouse /></button>
+                    <button  >scroll <CgMouse /></button>
                 </a>
             </div>
             <h2 className="homeHeading">Featured Products</h2>
@@ -80,8 +81,7 @@ const LandingPage = ({ data }) => {
                 total={5}
                 onPageChange={page => handlePageChange(page)}
             />
-        </>}
         </>)
 }
 
-export default LandingPage
+export default ProductsPage
