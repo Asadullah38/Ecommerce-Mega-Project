@@ -11,7 +11,9 @@
   justify-content: center;
   color: white;
 }
-
+body{
+  padding-top: 50px;
+}
 .banner > h1 {
   margin: 5vmax;
   font: 600 2.5vmax "Roboto";

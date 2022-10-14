@@ -15,7 +15,6 @@ const ProductsPage = ({ data }) => {
 
     const { product, error, pageNo, queries } = data;
     const [currentPage, setCurrentPage] = useState(1);
-
     useEffect(() => {
         setCurrentPage(pageNo);
     }, [])
@@ -37,18 +36,19 @@ const ProductsPage = ({ data }) => {
         else {
             window.scrollTo({ top: 200, behavior: 'smooth' })
         }
+        console.log(product && (Math.ceil(parseFloat(product.length / 3))))
     }
 
     //applyFilterAndSearch
     function applyFilterAndSearch() {
-        dispatch(getProduct(currentPage, min, max, ratingAbove, category,keyword));
+        dispatch(getProduct(currentPage, min, max, ratingAbove, category, keyword));
     }
 
-
+    
     return (
-
-        <>
-
+    
+    <>
+    
             <ReactAlerts error={error} type="error" title="Timed out" quoteString="Connection Timed out. Items Loading unsuccessful." />
             <MetaData title="Ecommerce Red Store" />
             <div className="banner">
@@ -78,7 +78,7 @@ const ProductsPage = ({ data }) => {
                 previousLabel="Prev"
                 nextLabel="Next"
                 current={currentPage}
-                total={5}
+                total={3}
                 onPageChange={page => handlePageChange(page)}
             />
         </>)

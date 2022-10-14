@@ -13,7 +13,7 @@ const Product = ({ product }) => {
     }
     return (
         <div>
-            <Link style={{ textDecoration: "none", color: "black" }} to={`product/${product._id}`}>
+            <Link style={{ textDecoration: "none", color: "black" }} to={`/product/${product._id}`}>
                 <div className="ProductCard">
                     <img id={product._id} src={product.images[0].url} style={{ objectFit: "contain" }} alt={product.name} />
                     <p id='nameofProduct'>{product.name}</p>

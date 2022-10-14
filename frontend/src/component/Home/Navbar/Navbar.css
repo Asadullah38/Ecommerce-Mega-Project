@@ -1,17 +1,20 @@
 @media (max-width: 768px) {
-    #searchbar{
-        width: 10em;margin-right: 5px;
-    }#buttonsubmit{
-        height: 37px;
-        font-size: 12px;
-    }
+  #searchbar {
+    width: 10em;
+    margin-right: 5px;
+  }
+  #buttonsubmit {
+    height: 37px;
+    font-size: 12px;
+  }
 }
 @media (max-width: 400px) {
-    #searchbar{
-        width: 7em;
-        margin-right: 5px;
-    }#buttonsubmit{
-        height: 37px;
-        font-size: 10px;
-    }
+  #searchbar {
+    width: 7em;
+    margin-right: 5px;
+  }
+  #buttonsubmit {
+    height: 37px;
+    font-size: 10px;
+  }
 }

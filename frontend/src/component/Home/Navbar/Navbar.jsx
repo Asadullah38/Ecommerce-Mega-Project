@@ -12,7 +12,6 @@ const Navbar = () => {
     const search = (e) => {
         e.preventDefault();
         dispatch(getProduct(undefined,undefined,undefined,undefined,undefined,keyword))
-
     }
     return (
         <div>

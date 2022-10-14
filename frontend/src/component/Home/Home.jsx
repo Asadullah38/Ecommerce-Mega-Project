@@ -7,7 +7,6 @@ import { getProduct } from '../../actions/productActions';
 
 const Home = () => {
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(getProduct())
     }, [dispatch])
@@ -15,6 +14,7 @@ const Home = () => {
 
     const data = useSelector(state => state.products);
     const { loading} = data;
+    
     return (
         <>
             {loading ? <Loader /> :<LandingPage data={data} />}

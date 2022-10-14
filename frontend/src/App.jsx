@@ -6,6 +6,7 @@ import webfonts from "webfontloader";
 import ProductDetails from "./component/layout/ProductDetails/ProductDetails";
 import ProductsWrapper from "./component/ProductsPage/ProductsWrapper";
 import Navbar from "./component/Home/Navbar/Navbar";
+import DetailsWrapper from "./component/layout/ProductDetails/DetailsWrapper";
 
 
 function App() {
@@ -23,7 +24,7 @@ function App() {
         <Navbar/>
         <Routes >
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/product/:id" element={<ProductDetails />} />
+          <Route exact path="/product/:id" element={<DetailsWrapper />} />
           <Route exact path="/Products" element={<ProductsWrapper />} />
         </Routes>
       </BrowserRouter>

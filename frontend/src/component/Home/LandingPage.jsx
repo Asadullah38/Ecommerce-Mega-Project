@@ -14,7 +14,7 @@ import Loader from '../layout/Loader.jsx/Loader.jsx';
 const LandingPage = ({ data }) => {
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
-    const { product, error, pageNo, queries, loading } = data;
+    const { product, error, pageNo, loading } = data;
     useEffect(() => {
         setCurrentPage(pageNo);
     }, [])
@@ -22,15 +22,11 @@ const LandingPage = ({ data }) => {
 
     // Filter Box States
 
-    let [min, setmin] = useState(queries && queries.price.gte);
-    let [max, setmax] = useState(queries && queries.price.lte);
-    let [ratingAbove, setRatingsAbove] = useState(queries && queries.ratings.gte);
-    let [category, setCategory] = useState(queries && queries.category);
 
     //Pagination
     function handlePageChange(page) {
         setCurrentPage(page);
-        dispatch(getProduct(page, min, max, ratingAbove, category));
+        dispatch(getProduct(page));
         if (product.length >= 1) {
             window.scrollTo({ top: 675, behavior: 'smooth' })
         }
@@ -39,10 +35,6 @@ const LandingPage = ({ data }) => {
         }
     }
 
-    //applyFilterAndSearch
-    function applyFilterAndSearch() {
-        dispatch(getProduct(currentPage, min, max, ratingAbove, category));
-    }
 
 
     return (
@@ -63,9 +55,6 @@ const LandingPage = ({ data }) => {
             </div>
             <h2 className="homeHeading">Featured Products</h2>
             <div id="rowflex">
-                <center>
-                    <FilterBox applyFilterAndSearch={applyFilterAndSearch} min={min} max={max} setmin={setmin} setmax={setmax} setRatingsAbove={setRatingsAbove} ratingAbove={ratingAbove} category={category} setCategory={setCategory} />
-                </center>
                 {(product && product.length >= 1) ? <>
                     <div className="container" id="container">
                         {product && product.map((item, key) => { return <Product product={item} key={item._id} /> })}
@@ -77,7 +66,7 @@ const LandingPage = ({ data }) => {
                 previousLabel="Prev"
                 nextLabel="Next"
                 current={currentPage}
-                total={5}
+                total={3}
                 onPageChange={page => handlePageChange(page)}
             />
         </>}
