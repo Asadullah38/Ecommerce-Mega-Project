@@ -11,6 +11,7 @@ const Product = ({ product }) => {
         isHalf: true,
         backgroundColor: "rgba(255, 255, 255, 0.5)",
     }
+
     return (
         <div>
             <Link style={{ textDecoration: "none", color: "black" }} to={`/product/${product._id}`}>

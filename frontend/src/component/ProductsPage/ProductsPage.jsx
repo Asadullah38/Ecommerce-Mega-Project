@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Product from "../Home/Product";
 import MetaData from '../layout/MetaData';
 import { CgMouse } from "react-icons/cg"
-import ReactAlerts from '../layout/Alerts/ReactAlerts';
 import Pagination, { bootstrap5PaginationPreset } from "react-responsive-pagination";
 import { useDispatch, useSelector } from "react-redux"
 import { getProduct } from '../../actions/productActions';
@@ -49,7 +48,6 @@ const ProductsPage = ({ data }) => {
     
     <>
     
-            <ReactAlerts error={error} type="error" title="Timed out" quoteString="Connection Timed out. Items Loading unsuccessful." />
             <MetaData title="Ecommerce Red Store" />
             <div className="banner">
                 <p>

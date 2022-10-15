@@ -4,29 +4,19 @@ import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import "./ProductDetails.css";
 import ReactStars from "react-rating-stars-component"
-import Loader from '../Loader.jsx/Loader';
 import Reviews from './Reviews';
-import ReactAlerts from '../Alerts/ReactAlerts';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProductDetails } from '../../../actions/productActions';
+import { options } from "./objects";
+import MetaData from '../MetaData';
 
 
 const ProductDetails = ({ product }) => {
-    const options = {
-        isHalf: true,
-        edit: false,
-        value: product && product.ratings,
-        color: "lightgrey",
-        activeColor: "orange",
-        size: window.innerWidth < 600 ? 20 : 25,
-        backgroundColor: "rgba(255, 255, 255, 0.5)",
-    }
+
 
     let [qty, setQty] = useState(1)
-    let [unit, setunit] = useState(product && product.price);
-    let [price, setprice] = useState(product && product.price);
+    const unit = product.price;
+    let [price, setprice] = useState(product.price);
     let [ShowReviews, setShowReviews] = useState(false);
-    let [ratings, setratings] = useState(product && product.ratings);
+    let [ratings, setratings] = useState(product.ratings);
     useEffect(() => {
         setprice(unit * qty);
     })
@@ -37,9 +27,7 @@ const ProductDetails = ({ product }) => {
 
     return (
         <>
-
-
-
+<MetaData title={"ProductDetails"}/>
             <div id="Reviews">
                 <div id='ProductDetailsMain'>
                     {/* Carousel */}
@@ -48,8 +36,8 @@ const ProductDetails = ({ product }) => {
                             {product.images.map((item, key) => {
                                 return (
                                     <div key={key}>
-                                        <img alt='ProductImage' src={item.url} />
-                                        <p className="legend">{product.name} Image {key + 1}</p>
+                                        <img alt='ProductImage' src={item.url}  />
+                                        <p className="legend">{product.name}</p>
                                     </div>
                                 )
                             })}
@@ -61,8 +49,8 @@ const ProductDetails = ({ product }) => {
                         <h2 id='ProductTitle'>{product.name}</h2>
                         <hr />
                         <div id="ReviewStars">
-                            <h2 className='HomeHeading' id='HomeHeading'>&nbsp;&nbsp; {product.ratings.toPrecision(2)}  Stars Ratings</h2>
-                            {product && <ReactStars {...options} />}
+                            <ReactStars {...options} value={ratings} />
+                            <h2 className='HomeHeading' id='HomeHeading'>&nbsp;&nbsp; {ratings.toPrecision(2)}  Stars Ratings</h2>
                         </div>
                         <hr />
                         <div id="rowDirection">
@@ -97,8 +85,6 @@ const ProductDetails = ({ product }) => {
                 {ShowReviews ? <Reviews product={product} /> : null}
 
             </div>
-            {/* <ReactAlerts error={error} type="error" title="Error" quoteString="Product Not Found." />
-            {navigate("/")} <h1>Product Not Found. Come Back Later.</h1> */}
         </>
     )
 }

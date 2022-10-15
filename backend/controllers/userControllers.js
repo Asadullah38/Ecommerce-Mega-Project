@@ -5,10 +5,15 @@ const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const sendToken = require("../utils/sendToken");
 const { sendPasswordResetEmail } = require("../utils/sendEmail");
 const crypto = require("crypto");
+const v2 = require("../config/cloudinary");
+
 
 //==========Create a new User.====================
 exports.createUser = catchAsyncErrors(async (req, res, next) => {
-  const newUser = await user.create(req.body);
+  const result = await v2.uploader.upload(req.body.avatar, { folder: 'avatars', width: 150, crop: "scale" });
+  const { name, email, password } = req.body;
+  const newUser = new user({ name, email, password, avatar: { publicID: result.public_id, url: result.url } });
+  await newUser.save();
   sendToken(newUser, 200, req, res);
 });
 
@@ -113,6 +118,10 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 //Get User Details
 exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
   const loggedInUser = await user.findById(req.user.id);
+  if (!loggedInUser) {
+    return next(new ErrorHandler("Not Signed In.", 400));
+
+  }
   res.status(200).json({
     success: true,
     loggedInUser

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getProductDetails } from '../../../actions/productActions';
+import { clearErrors, getProductDetails } from '../../../actions/productActions';
 import { useSelector, useDispatch } from "react-redux";
 import Loader from '../Loader.jsx/Loader';
 import ProductDetails from './ProductDetails';
@@ -13,12 +13,16 @@ const DetailsWrapper = () => {
     useEffect(() => {
         dispatch(getProductDetails(param.id));
     }, [dispatch, param]);
-    
+
 
     const currentProduct = useSelector(state => state.productDetails);
-    const { loading, product } = currentProduct;
+    const { loading, product, error } = currentProduct;
 
-
+    useEffect(() => {
+        if (error) {
+            dispatch(clearErrors);
+        }
+    })
 
     return (
         <div>{loading ? <Loader /> : !loading && product ? <ProductDetails product={product} /> : <h1>Product Not Found. We are sorry for inconvenience</h1>}</div>

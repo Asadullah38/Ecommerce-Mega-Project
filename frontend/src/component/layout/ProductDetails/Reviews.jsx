@@ -14,23 +14,25 @@ const Reviews = ({ product }) => {
             </center >
             <br /><br />
             <center>
-                <MultiCarousel infinite={true} partialVisible={false} responsive={responsive} autoPlay={true} autoPlaySpeed={2000}>
-                    {product.reviews.map((item, index) => {
-                        return (
-                            <div key={index} className="wrapper">
-                                <div className="profile">
-                                    <img alt="authorimage" style={{ padding: '5px', borderRadius: "50px" }} src={item.avatar} className="thumbnail" />
-                                    <h3 className="name">{item.name}</h3>
-                                    <p className="description">{item.comment}</p>
-                                    <div className='reactstar'>
-                                        <ReactStars {...options} value={item.rating}></ReactStars>
-                                        <p className="title">{item.rating} STARS RATING</p>
+                <div className="multiCarousel">
+                    <MultiCarousel infinite={true} partialVisible={false} responsive={responsive} autoPlay={true} autoPlaySpeed={2000}>
+                        {product.reviews.map((item, index) => {
+                            return (
+                                <div key={index} className="wrapper">
+                                    <div className="profile">
+                                        <img alt="authorimage" style={{ padding: '5px', borderRadius: "50px" }} src={item.avatar} className="thumbnail" />
+                                        <h3 className="name">{item.name}</h3>
+                                        <p className="description">{item.comment}</p>
+                                        <div className='reactstar'>
+                                            <ReactStars {...options} value={item.rating}></ReactStars>
+                                            <p className="title">{item.rating} STARS RATING</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    })}
-                </MultiCarousel>
+                            )
+                        })}
+                    </MultiCarousel>
+                </div>
             </center>
 
         </div>
