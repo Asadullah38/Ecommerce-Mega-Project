@@ -3,19 +3,29 @@ import Product from "./Product.jsx";
 import MetaData from '../layout/MetaData';
 import { CgMouse } from "react-icons/cg"
 import Pagination, { bootstrap5PaginationPreset } from "react-responsive-pagination";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { getProduct } from '../../actions/productActions';
 import Loader from '../layout/Loader.jsx/Loader.jsx';
-
-
+import { ReactNotifications } from "react-notifications-component";
+import Notification from '../Notification/Notification.js';
 
 const LandingPage = ({ data }) => {
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
     const { product, error, pageNo, loading } = data;
-   
+    const user = useSelector(state => state.user);
+    const { isAuthenticated } = user;
+
     useEffect(() => {
         setCurrentPage(pageNo);
+        setTimeout(() => {
+            if (!loading && isAuthenticated) {
+                Notification('Success', 'USER LOGGED IN', 'success')
+            }
+            else if (!loading && !isAuthenticated) {
+                Notification('WARNING', 'You are not signed in.', 'warning')
+            }
+        }, 100);
     }, [])
 
 
@@ -40,6 +50,7 @@ const LandingPage = ({ data }) => {
 
         <>{loading ? <Loader /> : <>
             <MetaData title="Ecommerce Red Store" />
+            {isAuthenticated && <ReactNotifications />}
             <div className="banner">
                 <p>
                     Welcome to Ecommerce Red Store

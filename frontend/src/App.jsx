@@ -11,6 +11,7 @@ import store from "./store";
 import { loadUser } from "./actions/userActions";
 
 function App() {
+  
   React.useEffect(() => {
     webfonts.load({
       google: {
@@ -18,7 +19,7 @@ function App() {
       },
     });
     store.dispatch(loadUser());
-    }, []);
+  }, []);
 
 
   return (

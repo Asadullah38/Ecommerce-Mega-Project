@@ -7,6 +7,7 @@ import { getProduct } from '../../actions/productActions';
 
 const Home = () => {
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getProduct())
     }, [dispatch])

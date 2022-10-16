@@ -1,22 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import Product from "../Home/Product";
 import MetaData from '../layout/MetaData';
-import { CgMouse } from "react-icons/cg"
+import { CgMouse, CgWindows } from "react-icons/cg"
 import Pagination, { bootstrap5PaginationPreset } from "react-responsive-pagination";
 import { useDispatch, useSelector } from "react-redux"
-import { getProduct } from '../../actions/productActions';
+import { clearErrors, getProduct } from '../../actions/productActions';
 import FilterBox from '../Filters/FilterBox.jsx';
+import { ReactNotifications } from 'react-notifications-component'
+import Notification from '../Notification/Notification';
 
 
 
 const ProductsPage = ({ data }) => {
     const dispatch = useDispatch();
-
-    const { product, error, pageNo, queries } = data;
+    const { product, error, pageNo, queries, loading } = data;
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => {
         setCurrentPage(pageNo);
+        if (error) {
+            setTimeout(() => {
+                Notification("Error", error, "error");
+            }, 10);
+            clearErrors();
+        }
     }, [])
+
+
+
+
+
 
     // Filter Box States
     let [min, setmin] = useState(queries && queries.price.gte);
@@ -43,12 +55,13 @@ const ProductsPage = ({ data }) => {
         dispatch(getProduct(currentPage, min, max, ratingAbove, category, keyword));
     }
 
-    
+
     return (
-    
-    <>
-    
+
+        <>
+
             <MetaData title="Ecommerce Red Store" />
+            {error && <ReactNotifications />}
             <div className="banner">
                 <p>
                     Welcome to Ecommerce Red Store
