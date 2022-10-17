@@ -4,21 +4,25 @@ import Loader from '../layout/Loader.jsx/Loader';
 import LandingPage from './LandingPage';
 import { useDispatch, useSelector } from "react-redux"
 import { getProduct } from '../../actions/productActions';
+import { loadUser } from "../../actions/userActions";
+import Speeddial from '../SpeedDial/Speeddial';
 
 const Home = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getProduct())
+        dispatch(loadUser());
     }, [dispatch])
 
 
     const data = useSelector(state => state.products);
+    const user = useSelector(state => state.user);
     const { loading } = data;
 
     return (
         <>
-            {loading ? <Loader /> : <LandingPage data={data} />}
+            {loading ? <Loader /> : <LandingPage data={data} user={user} />}
         </>
     )
 }

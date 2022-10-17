@@ -3,29 +3,28 @@ import Product from "./Product.jsx";
 import MetaData from '../layout/MetaData';
 import { CgMouse } from "react-icons/cg"
 import Pagination, { bootstrap5PaginationPreset } from "react-responsive-pagination";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { getProduct } from '../../actions/productActions';
 import Loader from '../layout/Loader.jsx/Loader.jsx';
 import { ReactNotifications } from "react-notifications-component";
 import Notification from '../Notification/Notification.js';
 
-const LandingPage = ({ data }) => {
+const LandingPage = ({ data, user }) => {
     const dispatch = useDispatch();
     const [currentPage, setCurrentPage] = useState(1);
-    const { product, error, pageNo, loading } = data;
-    const user = useSelector(state => state.user);
-    const { isAuthenticated } = user;
+    const { product, pageNo, loading } = data;
+    const { loadingUser, isAuthenticated, error } = user;
 
     useEffect(() => {
         setCurrentPage(pageNo);
         setTimeout(() => {
-            if (!loading && isAuthenticated) {
+            if (!loadingUser && isAuthenticated && user) {
                 Notification('Success', 'USER LOGGED IN', 'success')
             }
-            else if (!loading && !isAuthenticated) {
-                Notification('WARNING', 'You are not signed in.', 'warning')
+            else if (!loadingUser && error) {
+                Notification(`Error`, error, 'error')
             }
-        }, 100);
+        }, 1000);
     }, [])
 
 
@@ -68,7 +67,10 @@ const LandingPage = ({ data }) => {
                     <div className="container" id="container">
                         {product && product.map((item, key) => { return <Product product={item} key={item._id} /> })}
                     </div>
-                </> : null}
+                </> : <center>
+                    <h1>No Products on this page.</h1><br /><br />
+                </center>
+                }
             </div>
             <Pagination
                 {...bootstrap5PaginationPreset}

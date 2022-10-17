@@ -36,6 +36,7 @@ const Forms = () => {
         }
         else {
             dispatch(registerUser(name, rEmail, rPassword, avatarurl));
+            
         }
     }
 

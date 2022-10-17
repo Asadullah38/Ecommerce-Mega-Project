@@ -9,6 +9,7 @@ import DetailsWrapper from "./component/layout/ProductDetails/DetailsWrapper";
 import Forms from "./component/RegistrationForm/Forms";
 import store from "./store";
 import { loadUser } from "./actions/userActions";
+import Speeddial from "./component/SpeedDial/Speeddial";
 
 function App() {
   
@@ -32,7 +33,9 @@ function App() {
           <Route exact path="/Products" element={<ProductsWrapper />} />
           <Route exact path="/form" element={<Forms />} />
         </Routes>
+      <Speeddial/>
       </BrowserRouter>
+
       {/* Footer
       <div id='footerdiv' style={{position:"relative"}}>
         <Footer />

@@ -8,7 +8,7 @@ import { clearErrors, getProduct } from '../../actions/productActions';
 import FilterBox from '../Filters/FilterBox.jsx';
 import { ReactNotifications } from 'react-notifications-component'
 import Notification from '../Notification/Notification';
-
+import Search from "../Search/SearchComponent";
 
 
 const ProductsPage = ({ data }) => {
@@ -24,7 +24,6 @@ const ProductsPage = ({ data }) => {
             clearErrors();
         }
     }, [])
-
 
 
 
@@ -75,7 +74,9 @@ const ProductsPage = ({ data }) => {
             </div>
             <h2 className="homeHeading">Featured Products</h2>
             <div id="rowflex">
+
                 <center>
+                <Search/>
                     <FilterBox applyFilterAndSearch={applyFilterAndSearch} min={min} max={max} setmin={setmin} setmax={setmax} setRatingsAbove={setRatingsAbove} ratingAbove={ratingAbove} category={category} setCategory={setCategory} />
                 </center>
                 {(product && product.length >= 1) ? <>

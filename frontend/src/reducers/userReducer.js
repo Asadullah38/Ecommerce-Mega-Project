@@ -30,7 +30,6 @@ export const userReducer = ((state = { user: {} }, action) => {
         case LOGOUT_FAIL:
             return {
                 ...state,
-                isAuthenticated: false,
                 loading: false,
                 error: action.payload
             }
