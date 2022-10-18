@@ -28,15 +28,15 @@ const Forms = () => {
     //Register User
     const RegisterUser = (e) => {
         e.preventDefault();
-        if(!avatar || !rPassword || !name || !rEmail){
+        if (!avatar || !rPassword || !name || !rEmail) {
             Notification("Error", "Enter Complete Information", "danger");
         }
-        else if  (rPassword !== repPassword) {
+        else if (rPassword !== repPassword) {
             Notification("Error", "Passwords Do not Match", "danger");
         }
         else {
             dispatch(registerUser(name, rEmail, rPassword, avatarurl));
-            
+
         }
     }
 
@@ -45,8 +45,11 @@ const Forms = () => {
     //Login Function
     const loginFunction = (e) => {
         e.preventDefault();
+        if (!password || !email) {
+            Notification("Error", "Enter Complete Information", "danger");
+        }else{
         dispatch(login(email, password));
-    }
+    }}
 
     //useeffect
     useEffect(() => {

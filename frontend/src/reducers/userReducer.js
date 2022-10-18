@@ -1,4 +1,6 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS,REGISTRATION_REQUEST,REGISTRATION_FAIL } from "../constants/userConstants";
+import {
+    LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, REGISTRATION_FAIL, PROFILE_UPDATE_FAIL, PROFILE_UPDATE_REQUEST, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_RESET
+} from "../constants/userConstants";
 
 
 export const userReducer = ((state = { user: {} }, action) => {
@@ -62,3 +64,45 @@ export const userReducer = ((state = { user: {} }, action) => {
     }
 })
 
+
+
+
+export const profileReducer = (state = { updatedProfile: {} }, action) => {
+    switch (action.type) {
+        case PROFILE_UPDATE_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+
+        case PROFILE_UPDATE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isUpdated: action.payload,
+            }
+
+        case PROFILE_UPDATE_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }
+
+        case PROFILE_UPDATE_RESET:
+            return {
+                ...state,
+                isUpdated: false,
+            };
+
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null,
+            };
+
+            default:
+                return state;
+    }
+
+};

@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Routes, Route, } from "react-router-dom"; import Header from "./component/layout/Header/Header.jsx";
+import { BrowserRouter, Routes, Route, } from "react-router-dom"; 
 import Home from "./component/Home/Home.jsx";
 import webfonts from "webfontloader";
 import ProductsWrapper from "./component/ProductsPage/ProductsWrapper";
@@ -10,29 +10,35 @@ import Forms from "./component/RegistrationForm/Forms";
 import store from "./store";
 import { loadUser } from "./actions/userActions";
 import Speeddial from "./component/SpeedDial/Speeddial";
+import { useSelector } from "react-redux";
+import Profile from "./component/Profile/Profile";
+import UpdateProfile from "./component/Profile/UpdateProfile";
 
 function App() {
-
   React.useEffect(() => {
     webfonts.load({
       google: {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
+
     store.dispatch(loadUser());
   }, []);
-
+  
+  const { isAuthenticated, loading } = useSelector(state => state.user);
 
   return (
     <div>
       <BrowserRouter>
         <Speeddial />
-        <Navbar />
+        {!loading && <Navbar />}
         <Routes >
           <Route exact path="/" element={<Home />} />
           <Route exact path="/product/:id" element={<DetailsWrapper />} />
           <Route exact path="/Products" element={<ProductsWrapper />} />
           <Route exact path="/login" element={<Forms />} />
+          <Route exact path="/Profile" element={isAuthenticated?<Profile />:<Forms/>} />
+          <Route exact path="/UpdateProfile" element={isAuthenticated?<UpdateProfile />:<Forms/>} />
         </Routes>
       </BrowserRouter>
 

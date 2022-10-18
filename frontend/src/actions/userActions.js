@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, REGISTRATION_FAIL } from "../constants/userConstants";
+import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, REGISTRATION_FAIL, PROFILE_UPDATE_FAIL, PROFILE_UPDATE_RESET, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_REQUEST } from "../constants/userConstants";
 import axios from "axios";
 
 
@@ -8,7 +8,6 @@ export const registerUser = (name, email, password, avatar) => async (dispatch) 
 
         const config = { Headers: { "Content-Type": "application/json" } }
         const { data } = await axios.post(`/createuser`, { name, email, password, avatar }, config);
-        console.log(data);
         dispatch({
             type: REGISTRATION_SUCCESS,
             payload: data.newUser
@@ -30,7 +29,6 @@ export const login = (email, password) => async (dispatch) => {
 
         const config = { Headers: { "Content-Type": "application/json" } }
         const { data } = await axios.post(`/loginUser`, { email, password }, config);
-        console.log(data);
         dispatch({
             type: LOGIN_SUCCESS,
             payload: data.user
@@ -49,7 +47,6 @@ export const loadUser = () => async (dispatch) => {
         dispatch({ type: USER_LOAD_REQUEST })
 
         const { data } = await axios.get(`/me`);
-        console.log(data);
         dispatch({
             type: USER_LOAD_SUCCESS,
             payload: data.loggedInUser
@@ -67,7 +64,6 @@ export const logout = () => async (dispatch) => {
     try {
 
         const { data } = await axios.get(`/logout`);
-        console.log(data);
         dispatch({ type: LOGOUT_SUCCESS })
     } catch (error) {
         dispatch({
@@ -76,6 +72,27 @@ export const logout = () => async (dispatch) => {
         })
     }
 }
+
+export const updateProfile = (name, avatar) => async (dispatch) => {
+    try {
+
+        dispatch({ type: PROFILE_UPDATE_REQUEST })
+        const config = { Headers: { "Content-Type": "application/json" } }
+
+        const { data } = await axios.put(`/me/updateProfile`, { name, avatar }, config);
+        dispatch({
+            type: PROFILE_UPDATE_SUCCESS,
+            payload: data.success
+        })
+    } catch (error) {
+        dispatch({
+            type: PROFILE_UPDATE_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
+
+
 
 
 
