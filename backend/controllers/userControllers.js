@@ -10,7 +10,6 @@ const v2 = require("../config/cloudinary");
 
 //==========Create a new User.====================
 exports.createUser = catchAsyncErrors(async (req, res, next) => {
-
   const { name, email, password } = req.body;
   const result = await v2.uploader.upload(req.body.avatar, { folder: 'avatars', width: 150, crop: "scale" });
   const User = new user({ name, email, password, avatar: { publicID: result.public_id, url: result.url } });

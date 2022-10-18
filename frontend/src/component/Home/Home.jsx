@@ -5,7 +5,6 @@ import LandingPage from './LandingPage';
 import { useDispatch, useSelector } from "react-redux"
 import { getProduct } from '../../actions/productActions';
 import { loadUser } from "../../actions/userActions";
-import Speeddial from '../SpeedDial/Speeddial';
 
 const Home = () => {
     const dispatch = useDispatch();

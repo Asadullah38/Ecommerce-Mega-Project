@@ -12,7 +12,7 @@ import { loadUser } from "./actions/userActions";
 import Speeddial from "./component/SpeedDial/Speeddial";
 
 function App() {
-  
+
   React.useEffect(() => {
     webfonts.load({
       google: {
@@ -26,14 +26,14 @@ function App() {
   return (
     <div>
       <BrowserRouter>
+        <Speeddial />
         <Navbar />
         <Routes >
           <Route exact path="/" element={<Home />} />
           <Route exact path="/product/:id" element={<DetailsWrapper />} />
           <Route exact path="/Products" element={<ProductsWrapper />} />
-          <Route exact path="/form" element={<Forms />} />
+          <Route exact path="/login" element={<Forms />} />
         </Routes>
-      <Speeddial/>
       </BrowserRouter>
 
       {/* Footer
