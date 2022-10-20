@@ -5,7 +5,7 @@ import ProfileLogo from "@mui/icons-material/Person"
 import { clearErrors, loadUser, updateProfile } from '../../actions/userActions';
 import Loader from "../layout/Loader.jsx/Loader";
 import Notification from "../Notification/Notification";
-import { ReactNotifications } from 'react-notifications-component';
+import { ReactNotifications } from "react-notifications-component";
 import { useNavigate } from 'react-router-dom';
 
 const UpdateProfile = () => {
@@ -29,14 +29,17 @@ const UpdateProfile = () => {
         }
     }, [avatar])
 
-
     //useeffect
     useEffect(() => {
         if (!loading && error) {
             Notification("Error", error, "danger");
             clearErrors();
         }
-    }, [dispatch, error])
+        else if (!loading && isUpdated) {
+Navigate("/Profile");
+            // Notification("Success", "Successfully Updated. Kindly Refresh the Page.", "success");
+        }
+    }, [dispatch, error, isUpdated])
 
 
 

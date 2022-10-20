@@ -1,27 +1,35 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Profile.css"
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import { loadUser } from '../../actions/userActions';
+import Notification from '../Notification/Notification';
+import { ReactNotifications } from 'react-notifications-component';
 
 
 const Profile = () => {
     const dispatch = useDispatch();
     const { user, loading } = useSelector(state => state.user);
     const { isUpdated } = useSelector(state => state.updatedProfile);
+    const [url, seturl] = useState(user && user.avatar.url)
 
     useEffect(() => {
-dispatch(loadUser);
-    }, [dispatch])
+
+        dispatch(loadUser);
+        if (isUpdated) {
+            Notification("success", "Updated Successfully. Please Refresh the Page", "success");
+        }
+    }, [dispatch, isUpdated])
 
     return (
         <div id='ProfilBody'>
+            {isUpdated && <ReactNotifications />}
             <div className="container emp-profile">
                 <form method="post">
                     <div className="row">
                         <div className="col-md-4">
                             <div className="profile-img">
-                                {!loading && <img src={user.avatar.url || "https://bootdey.com/img/Content/avatar/avatar7.png"} alt="" />}
+                                {!loading && <img src={url || "https://bootdey.com/img/Content/avatar/avatar7.png"} alt="" />}
                                 <Link to={"/UpdateProfile"}>
                                     <div style={{ cursor: "pointer" }} className="file mb-5 btn btn-lg btn-primary mt-1">
                                         Change Photo
