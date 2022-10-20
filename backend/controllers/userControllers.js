@@ -156,24 +156,21 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 //Update profile if user is Logged In.
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   const loggedInUser = await user.findById(req.user.id);
-  let newData = {
+  
+
+  const imageid = loggedInUser.avatar.publicID;
+  await v2.uploader.destroy(imageid);
+  const result = await v2.uploader.upload(req.body.avatar, { folder: 'avatars', width: 150, crop: "scale" })
+  const newData = {
     name: req.body.name,
-  }
-  if (req.body.avatar !== undefined) {
-    const imageid = loggedInUser.avatar.publicID;
-    await v2.uploader.destroy(imageid);
-    const result = await v2.uploader.upload(req.body.avatar, { folder: 'avatars', width: 150, crop: "scale" })
-    newData = {
-      name: req.body.name,
-      avatar: {
-        publicID: result.public_id,
-        url: result.url
-      }
+    avatar: {
+      publicID: result.public_id,
+      url: result.url
     }
   }
 
   if (!req.body.name) {
-    return next(new ErrorHandler(`Enter New Name.`, 400));
+    return next(new ErrorHandler(`Enter Modified Name.`, 400));
   }
 
   const updatedUser = await user.findByIdAndUpdate(req.user.id, newData, { new: true, runValidators: true, useFindAndModify: false });

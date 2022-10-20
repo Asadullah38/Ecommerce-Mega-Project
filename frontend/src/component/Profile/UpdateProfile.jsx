@@ -14,7 +14,7 @@ const UpdateProfile = () => {
     const data = useSelector(state => state.updatedProfile);
     const { updatedProfile, loading, error, isUpdated } = data;
     const dispatch = useDispatch();
-    let [name, setname] = useState("");
+    let [name, setname] = useState(user && user.name);
     let [avatar, setavatar] = useState("");
     let [avatarurl, setavatarurl] = useState("");
 
@@ -36,8 +36,7 @@ const UpdateProfile = () => {
             clearErrors();
         }
         else if (!loading && isUpdated) {
-Navigate("/Profile");
-            // Notification("Success", "Successfully Updated. Kindly Refresh the Page.", "success");
+            Navigate("/Profile");
         }
     }, [dispatch, error, isUpdated])
 
@@ -51,8 +50,8 @@ Navigate("/Profile");
 
     const updateProfileFunction = (e) => {
         e.preventDefault();
-        if (!name) {
-            Notification("Error", "Enter Name Please", "danger");
+        if (!name || !avatar) {
+            Notification("Error", "Enter a Name and Select an Image.", "danger");
         } else {
             dispatch(updateProfile(name, avatarurl));
         }

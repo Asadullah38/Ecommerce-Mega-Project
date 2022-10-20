@@ -79,7 +79,10 @@ export const updateProfile = (name, avatar) => async (dispatch) => {
         dispatch({ type: PROFILE_UPDATE_REQUEST })
         const config = { Headers: { "Content-Type": "application/json" } }
 
+
         const { data } = await axios.put(`/me/updateProfile`, { name, avatar }, config);
+
+
         dispatch({
             type: PROFILE_UPDATE_SUCCESS,
             payload: data.success

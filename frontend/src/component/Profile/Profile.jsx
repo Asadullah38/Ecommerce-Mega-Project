@@ -6,7 +6,6 @@ import { loadUser } from '../../actions/userActions';
 import Notification from '../Notification/Notification';
 import { ReactNotifications } from 'react-notifications-component';
 
-
 const Profile = () => {
     const dispatch = useDispatch();
     const { user, loading } = useSelector(state => state.user);
@@ -17,7 +16,7 @@ const Profile = () => {
 
         dispatch(loadUser);
         if (isUpdated) {
-            Notification("success", "Updated Successfully. Please Refresh the Page", "success");
+            Notification("success", "Updated Successfully. Please Refresh the Page to see the Recent Update.", "success");
         }
     }, [dispatch, isUpdated])
 
