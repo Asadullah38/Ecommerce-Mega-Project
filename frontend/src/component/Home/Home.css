@@ -1,5 +1,5 @@
 .banner {
-  background: linear-gradient(to right, #635dc0, #3027ae);
+  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

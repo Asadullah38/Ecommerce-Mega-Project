@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter, Routes, Route, } from "react-router-dom"; 
+import { BrowserRouter, Routes, Route, } from "react-router-dom";
 import Home from "./component/Home/Home.jsx";
 import webfonts from "webfontloader";
 import ProductsWrapper from "./component/ProductsPage/ProductsWrapper";
@@ -13,6 +13,8 @@ import Speeddial from "./component/SpeedDial/Speeddial";
 import { useSelector } from "react-redux";
 import Profile from "./component/Profile/Profile";
 import UpdateProfile from "./component/Profile/UpdateProfile";
+import UpdatePassword from "./component/Password/UpdatePassword";
+import ForgotPassword from "./component/Password/ForgotPassword";
 
 function App() {
   React.useEffect(() => {
@@ -24,7 +26,7 @@ function App() {
 
     store.dispatch(loadUser());
   }, []);
-  
+
   const { isAuthenticated, loading } = useSelector(state => state.user);
 
   return (
@@ -37,8 +39,10 @@ function App() {
           <Route exact path="/product/:id" element={<DetailsWrapper />} />
           <Route exact path="/Products" element={<ProductsWrapper />} />
           <Route exact path="/login" element={<Forms />} />
-          <Route exact path="/Profile" element={isAuthenticated?<Profile />:<Forms/>} />
-          <Route exact path="/UpdateProfile" element={isAuthenticated?<UpdateProfile />:<Forms/>} />
+          <Route exact path="/password/forgot" element={<ForgotPassword /> } />
+          <Route exact path="/Profile" element={isAuthenticated ? <Profile /> : <Forms />} />
+          <Route exact path="/UpdateProfile" element={isAuthenticated ? <UpdateProfile /> : <Forms />} />
+          <Route exact path="/password/update" element={isAuthenticated ? <UpdatePassword /> : <Forms />} />
         </Routes>
       </BrowserRouter>
 

@@ -16,7 +16,7 @@ const Home = () => {
 
 
     const data = useSelector(state => state.products);
-    const user = useSelector(state => state.user);
+    const user= useSelector(state => state.user);
     const { loading } = data;
 
     return (
