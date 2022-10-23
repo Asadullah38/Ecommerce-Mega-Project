@@ -97,23 +97,26 @@ export const updateProfile = (name, avatar) => async (dispatch) => {
 
 
 
-export const updatePassword = (oldPassword,newPassword,confirmPassword) => async (dispatch) => {
+export const updateYourPassword = (oldPassword, newPassword, confirmPassword) => async (dispatch) => {
     try {
 
         dispatch({ type: UPDATE_PASSWORD_REQUEST })
         const config = { Headers: { "Content-Type": "application/json" } }
 
-
-        const { data } = await axios.put(`/password/update`, { oldPassword,newPassword,confirmPassword }, config);
+        console.log(oldPassword, newPassword, confirmPassword)
+        const { data } = await axios.put(`/password/update`, { oldPassword, newPassword, confirmPassword }, config);
+        console.log(data);
         dispatch({
             type: UPDATE_PASSWORD_SUCCESS,
-            payload: data.success
+            payload: data
         })
     } catch (error) {
+        console.log(error);
         dispatch({
             type: UPDATE_PASSWORD_FAIL,
             payload: error.response.data.message
         })
+
     }
 }
 

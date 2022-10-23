@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux';
 import "./Updatepassword.css"
+import { updateYourPassword } from '../../actions/userActions';
 const UpdatePassword = () => {
-    let [email, setemail] = useState("");
     let [oldpass, setoldpass] = useState("");
     let [password, setpassword] = useState("");
     let [rePassword, setrePassword] = useState("");
+    const dispatch = useDispatch();
 
+    const updatePassword = (e) => {
+        e.preventDefault();
+        // if (!oldpass || !password || !rePassword) {
+            dispatch(updateYourPassword(oldpass, password, rePassword));
+        // }
+    }
     return (
         <center>
             <div className='formwidth'>
@@ -27,7 +35,7 @@ const UpdatePassword = () => {
                         <input type="password" className="form-control" id="floatingPassword" placeholder="Repeat-Password" value={rePassword} onChange={(e) => { setrePassword(e.target.value) }} />
                         <label>Repeat - Password</label>
                     </div>
-                    <button className="btn btn-info mt-5" >Update</button>
+                    <button className="btn btn-info mt-5" onClick={updatePassword}>Update</button>
                 </form>
             </div>
         </center>
