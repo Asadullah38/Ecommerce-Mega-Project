@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import "./forms.css";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, login, registerUser } from '../../actions/userActions';
 import { ReactNotifications } from 'react-notifications-component'
@@ -47,9 +47,10 @@ const Forms = () => {
         e.preventDefault();
         if (!password || !email) {
             Notification("Error", "Enter Complete Information", "danger");
-        }else{
-        dispatch(login(email, password));
-    }}
+        } else {
+            dispatch(login(email, password));
+        }
+    }
 
     //useeffect
     useEffect(() => {
@@ -102,6 +103,9 @@ const Forms = () => {
                                     </div>
                                     <button className="btn btn-info mt-5" onClick={loginFunction}>Login</button>
                                 </form>
+                                <Link to={"/password/forgot"}>
+                                    <button className="btn btn-info mt-5 me-5">Forgot Password</button>
+                                </Link>
                                 <button className="btn btn-info mt-5" onClick={() => { setloginpage(!loginpage) }}>Register</button>
                             </div>
 

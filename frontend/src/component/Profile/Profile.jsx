@@ -70,8 +70,8 @@ const Profile = () => {
                             </div>
                             <div className="profile-work">
                                 <div className="col-md-2" >
-                                    <Link to="/ChangePassword">
-                                        <button type="button" style={{ cursor: "pointer", width: '150px', fontSize: "12px", color: 'white', fontWeight: "bolder" }} className="btn btn-info">Change Password</button>
+                                    <Link to="/password/update">
+                                        <button type="button" style={{ cursor: "pointer", width: '150px', fontSize: "12px", color: 'white', fontWeight: "bolder" }} className="btn btn-info">Update Password</button>
                                     </Link>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, REGISTRATION_FAIL, PROFILE_UPDATE_FAIL, PROFILE_UPDATE_RESET, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_REQUEST, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS } from "../constants/userConstants";
+import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, REGISTRATION_FAIL, PROFILE_UPDATE_FAIL, PROFILE_UPDATE_RESET, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_REQUEST, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS,FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_REQUEST } from "../constants/userConstants";
 import axios from "axios";
 
-
+//REGISTRATION OF NEW USER
 export const registerUser = (name, email, password, avatar) => async (dispatch) => {
     try {
         dispatch({ type: REGISTRATION_REQUEST })
@@ -22,7 +22,7 @@ export const registerUser = (name, email, password, avatar) => async (dispatch) 
 
 
 
-
+//LOGIN FUNCTION
 export const login = (email, password) => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_REQUEST })
@@ -41,7 +41,7 @@ export const login = (email, password) => async (dispatch) => {
     }
 }
 
-
+//CHECK BY LOADING USER
 export const loadUser = () => async (dispatch) => {
     try {
         dispatch({ type: USER_LOAD_REQUEST })
@@ -59,7 +59,7 @@ export const loadUser = () => async (dispatch) => {
     }
 }
 
-
+//LOGOUT FUNCTION
 export const logout = () => async (dispatch) => {
     try {
 
@@ -73,6 +73,7 @@ export const logout = () => async (dispatch) => {
     }
 }
 
+//UPDATE NAME AND AVATAR
 export const updateProfile = (name, avatar) => async (dispatch) => {
     try {
 
@@ -96,22 +97,19 @@ export const updateProfile = (name, avatar) => async (dispatch) => {
 }
 
 
-
+//UPDATE PASSWORD WHILE LOGGED IN
 export const updateYourPassword = (oldPassword, newPassword, confirmPassword) => async (dispatch) => {
     try {
 
         dispatch({ type: UPDATE_PASSWORD_REQUEST })
         const config = { Headers: { "Content-Type": "application/json" } }
 
-        console.log(oldPassword, newPassword, confirmPassword)
         const { data } = await axios.put(`/password/update`, { oldPassword, newPassword, confirmPassword }, config);
-        console.log(data);
         dispatch({
             type: UPDATE_PASSWORD_SUCCESS,
             payload: data
         })
     } catch (error) {
-        console.log(error);
         dispatch({
             type: UPDATE_PASSWORD_FAIL,
             payload: error.response.data.message
@@ -124,6 +122,26 @@ export const updateYourPassword = (oldPassword, newPassword, confirmPassword) =>
 
 
 
+
+//FORGOT_PASSWORD REQUESTING EMAIL
+export const forgotPassword = (email) => async (dispatch) => {
+    try {
+        dispatch({ type: FORGOT_PASSWORD_REQUEST })
+
+        const config = { Headers: { "Content-Type": "application/json" } }
+        const { data } = await axios.put(`/password/forgot`, { email}, config);
+        console.login(email,data);
+        dispatch({
+            type: FORGOT_PASSWORD_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: FORGOT_PASSWORD_FAIL,
+            payload: error.response.data.message
+        })
+    }
+}
 
 
 

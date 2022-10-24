@@ -39,7 +39,7 @@ function App() {
           <Route exact path="/product/:id" element={<DetailsWrapper />} />
           <Route exact path="/Products" element={<ProductsWrapper />} />
           <Route exact path="/login" element={<Forms />} />
-          <Route exact path="/password/forgot" element={<ForgotPassword /> } />
+          <Route exact path="/password/forgot" element={<ForgotPassword />} />
           <Route exact path="/Profile" element={isAuthenticated ? <Profile /> : <Forms />} />
           <Route exact path="/UpdateProfile" element={isAuthenticated ? <UpdateProfile /> : <Forms />} />
           <Route exact path="/password/update" element={isAuthenticated ? <UpdatePassword /> : <Forms />} />

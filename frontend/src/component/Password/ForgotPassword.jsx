@@ -1,8 +1,14 @@
 import React,{useState} from 'react'
+import { useDispatch } from 'react-redux';
+import { forgotPassword } from '../../actions/userActions';
 import "./ForgotPassword.css";
 const ForgotPassword = () => {
     const [email, setemail] = useState("");
-
+    const dispatch=useDispatch();
+const forgotPasswordFunction=(e)=>{
+    e.preventDefault();
+    dispatch(forgotPassword(email))
+}
     return (
         <div>
             <center>
@@ -17,7 +23,7 @@ const ForgotPassword = () => {
                             <input type="email" className="form-control" id="floatingPassword" placeholder="Enter Your Email." value={email} onChange={(e) => { setemail(e.target.value) }} />
                             <label>Email</label>
                         </div>
-                        <button className="btn btn-info mt-5" >Update</button>
+                        <button className="btn btn-info mt-5" onClick={forgotPasswordFunction} >Update</button>
                     </form>
                 </div>
             </center>
