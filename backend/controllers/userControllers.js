@@ -60,7 +60,6 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   if (!foundUser) {
     return next(new ErrorHandler("User Not Found."));
   }
-
   //Creating URL and Message for Reset Password
   let resetToken = crypto.randomBytes(20).toString("hex");
   const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
@@ -148,7 +147,6 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 
   loggedInUser.password = req.body.newPassword;
   await loggedInUser.save();
-
   sendToken(loggedInUser, 200, req, res);
 })
 
@@ -156,7 +154,7 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 //Update profile if user is Logged In.
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   const loggedInUser = await user.findById(req.user.id);
-  
+
 
   const imageid = loggedInUser.avatar.publicID;
   await v2.uploader.destroy(imageid);

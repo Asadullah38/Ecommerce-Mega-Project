@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, REGISTRATION_FAIL, PROFILE_UPDATE_FAIL, PROFILE_UPDATE_RESET, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_REQUEST, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS,FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_REQUEST } from "../constants/userConstants";
+import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, REGISTRATION_FAIL, PROFILE_UPDATE_FAIL, PROFILE_UPDATE_RESET, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_REQUEST, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_REQUEST, UPDATE_PASSWORD_SUCCESS, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_REQUEST } from "../constants/userConstants";
 import axios from "axios";
 
 //REGISTRATION OF NEW USER
@@ -96,7 +96,6 @@ export const updateProfile = (name, avatar) => async (dispatch) => {
     }
 }
 
-
 //UPDATE PASSWORD WHILE LOGGED IN
 export const updateYourPassword = (oldPassword, newPassword, confirmPassword) => async (dispatch) => {
     try {
@@ -129,8 +128,8 @@ export const forgotPassword = (email) => async (dispatch) => {
         dispatch({ type: FORGOT_PASSWORD_REQUEST })
 
         const config = { Headers: { "Content-Type": "application/json" } }
-        const { data } = await axios.put(`/password/forgot`, { email}, config);
-        console.login(email,data);
+        console.log(email);
+        const { data } = await axios.put(`/password/forgot`, { email }, config);
         dispatch({
             type: FORGOT_PASSWORD_SUCCESS,
             payload: data

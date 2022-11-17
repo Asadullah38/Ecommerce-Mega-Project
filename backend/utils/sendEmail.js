@@ -5,7 +5,9 @@ exports.sendPasswordResetEmail = async (options) => {
         auth: {
             user: process.env.SMTP_MAIL,
             pass: process.env.SMTP_PASSWORD
-        }
+        },
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT        
     })
     const mailOptions = {
         from: process.env.SMTP_MAIL,

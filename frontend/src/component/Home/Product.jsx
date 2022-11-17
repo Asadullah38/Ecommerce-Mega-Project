@@ -16,7 +16,7 @@ const Product = ({ product }) => {
         <div>
             <Link style={{ textDecoration: "none", color: "black" }} to={`/product/${product._id}`}>
                 <div className="ProductCard">
-                    <img id={product._id} src={product.images[0].url} style={{ objectFit: "cover" }} alt={product.name} />
+                    <img id={product._id} src={product.images[0].url} style={{ objectFit: "cover" }} alt={`${product.name} 's pic`} />
                     <p id='nameofProduct'>{product.name}</p>
                     <div><ReactStars {...options} /><span> {product.numOfReviews} reviews </span></div>
                     <span>{product.price} $</span>
