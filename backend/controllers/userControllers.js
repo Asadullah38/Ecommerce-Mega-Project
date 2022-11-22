@@ -62,7 +62,8 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   }
   //Creating URL and Message for Reset Password
   let resetToken = crypto.randomBytes(20).toString("hex");
-  const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
+  // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
+  const resetPasswordUrl = `http://localhost:3000/password/reset/${resetToken}`;
   const message = `Your Password Reset Token is :- \n\n${resetPasswordUrl}. If you have not requested this email kindly ignore this email.`;
 
   //Storing Hashed token in database

@@ -7,10 +7,15 @@ import ReactStars from "react-rating-stars-component"
 import Reviews from './Reviews';
 import { options } from "./objects";
 import MetaData from '../MetaData';
+import { useDispatch } from 'react-redux';
+import { AddToCart } from '../../../actions/CartActions';
+import { ReactNotifications } from "react-notifications-component";
+import Notification from '../../Notification/Notification';
+
 
 
 const ProductDetails = ({ product }) => {
-
+    const params = useParams();
 
     let [qty, setQty] = useState(1)
     const unit = product.price;
@@ -25,9 +30,15 @@ const ProductDetails = ({ product }) => {
         setShowReviews(!ShowReviews);
     }
 
+    const dispatch = useDispatch();
+    const addToCartFunction = () => {
+        dispatch(AddToCart(params.id, qty));
+        Notification("Success","Added To Cart Successfully.","success")
+    }
     return (
         <>
-<MetaData title={"ProductDetails"}/>
+            <ReactNotifications />
+            <MetaData title={"ProductDetails"} />
             <div id="Reviews">
                 <div id='ProductDetailsMain'>
                     {/* Carousel */}
@@ -36,7 +47,7 @@ const ProductDetails = ({ product }) => {
                             {product.images.map((item, key) => {
                                 return (
                                     <div key={key}>
-                                        <img alt='ProductImage' src={item.url}  />
+                                        <img alt='ProductImage' src={item.url} />
                                         <p className="legend">{product.name}</p>
                                     </div>
                                 )
@@ -58,7 +69,7 @@ const ProductDetails = ({ product }) => {
                             <button className="qtychange" disabled={(qty === 1) ? true : false} id="minus" onClick={() => setQty(qty - 1)}>-</button>
                             <h2 className='HomeHeading'>{qty}</h2>
                             <button className="qtychange" disabled={(qty === 5) ? true : false} id="plus" onClick={() => setQty(qty + 1)}>+</button>
-                            <button id='CartButton'>Add to Cart</button>
+                            <button id='CartButton' onClick={addToCartFunction}>Add to Cart</button>
                         </div>
                         <hr />
                         <div id="rowDirection">

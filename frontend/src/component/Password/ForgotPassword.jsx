@@ -8,7 +8,8 @@ import { forgotPassword } from '../../actions/userActions';
 import "./ForgotPassword.css";
 import { clearErrors } from '../../actions/userActions';
 const ForgotPassword = () => {
-    const { loading, error, isUpdated } = useSelector(state => state.updatedProfile);
+    const { loading, error, message } = useSelector(state => state.updatedProfile);
+    console.log(message);
     const [email, setemail] = useState("");
     const dispatch = useDispatch();
 
@@ -21,13 +22,14 @@ const ForgotPassword = () => {
         dispatch(forgotPassword(email))
     }
     useEffect(() => {
-        if (isUpdated) {
-            Notification("Success", "Email Sent Successfully.", "success");
+        if (message) {
+            Notification("Success", `Email Sent Successfully.`, "success");
+            setemail("");
         } else if (error) {
             Notification("Error", error, "danger");
             clearErrors();
         }
-    }, [error, isUpdated,loading])
+    }, [error, message, loading])
     return (
         <div>
             {loading ? <Loader /> :
@@ -44,6 +46,7 @@ const ForgotPassword = () => {
                                 <input type="email" className="form-control" id="floatingPassword" placeholder="Enter Your Email." value={email} onChange={(e) => { setemail(e.target.value) }} />
                                 <label>Email</label>
                             </div>
+                            {message ? <h6>Kindly Check Your Mail Box</h6> : <h6>Kindly Wait after sending request. This can take upto 2 minutes. </h6>}
                             <button className="btn btn-info mt-5" onClick={forgotPasswordFunction} >Update</button>
                         </form>
                     </div>

@@ -1,5 +1,5 @@
 import {
-    LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, REGISTRATION_FAIL, PROFILE_UPDATE_FAIL, PROFILE_UPDATE_REQUEST, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_RESET, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_REQUEST
+    LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, CLEAR_ERRORS, USER_LOAD_FAIL, USER_LOAD_REQUEST, USER_LOAD_SUCCESS, LOGOUT_FAIL, LOGOUT_SUCCESS, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, REGISTRATION_FAIL, PROFILE_UPDATE_FAIL, PROFILE_UPDATE_REQUEST, PROFILE_UPDATE_SUCCESS, PROFILE_UPDATE_RESET, UPDATE_PASSWORD_FAIL, UPDATE_PASSWORD_SUCCESS, UPDATE_PASSWORD_REQUEST, FORGOT_PASSWORD_FAIL, FORGOT_PASSWORD_SUCCESS, FORGOT_PASSWORD_REQUEST, RESET_PASSWORD_FAIL, RESET_PASSWORD_SUCCESS, RESET_PASSWORD_REQUEST
 } from "../constants/userConstants";
 
 
@@ -80,7 +80,7 @@ export const profileReducer = (state = { updatedProfile: {} }, action) => {
             return {
                 ...state,
                 loading: false,
-                message: action.payload
+                message: action.payload,
             }
 
         case FORGOT_PASSWORD_FAIL:
@@ -91,6 +91,7 @@ export const profileReducer = (state = { updatedProfile: {} }, action) => {
             }
         case PROFILE_UPDATE_REQUEST:
         case UPDATE_PASSWORD_REQUEST:
+        case RESET_PASSWORD_REQUEST:
             return {
                 ...state,
                 error: null,
@@ -98,6 +99,7 @@ export const profileReducer = (state = { updatedProfile: {} }, action) => {
             }
         case UPDATE_PASSWORD_SUCCESS:
         case PROFILE_UPDATE_SUCCESS:
+        case RESET_PASSWORD_SUCCESS:
             return {
                 ...state,
                 loading: false,
@@ -106,6 +108,7 @@ export const profileReducer = (state = { updatedProfile: {} }, action) => {
 
         case PROFILE_UPDATE_FAIL:
         case UPDATE_PASSWORD_FAIL:
+        case RESET_PASSWORD_FAIL:
             return {
                 ...state,
                 loading: false,
