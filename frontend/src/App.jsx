@@ -46,7 +46,7 @@ function App() {
           <Route exact path="/UpdateProfile" element={isAuthenticated ? <UpdateProfile /> : <Forms />} />
           <Route exact path="/password/update" element={isAuthenticated ? <UpdatePassword /> : <Forms />} />
           <Route exact path="/password/reset/:token" element={<ResetPassword />} />
-          <Route exact path="/cart" element={isAuthenticated?<Cart/>:<Home/>} />
+          <Route exact path="/cart" element={isAuthenticated ? <Cart /> : <Home />} />
         </Routes>
       </BrowserRouter>
 

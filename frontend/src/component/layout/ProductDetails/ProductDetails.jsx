@@ -33,7 +33,7 @@ const ProductDetails = ({ product }) => {
     const dispatch = useDispatch();
     const addToCartFunction = () => {
         dispatch(AddToCart(params.id, qty));
-        Notification("Success","Added To Cart Successfully.","success")
+        Notification("Success", "Added To Cart Successfully.", "success");
     }
     return (
         <>
