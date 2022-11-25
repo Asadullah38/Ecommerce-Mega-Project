@@ -24,8 +24,10 @@ const orderSchema = mongoose.Schema({
         },
         phoneNo: {
             type: String,
-            required: true
-        },
+            required: true,
+            minLength: [10, "Enter a Proper Phone Number."],
+  
+                },
     },
 
     orderItems: [{

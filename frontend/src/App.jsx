@@ -17,6 +17,7 @@ import UpdatePassword from "./component/Password/UpdatePassword";
 import ForgotPassword from "./component/Password/ForgotPassword";
 import ResetPassword from "./component/Password/ResetPassword";
 import Cart from "./component/Cart/Cart";
+import ShippingForm from "./component/Shipping/ShippingForm";
 
 function App() {
   React.useEffect(() => {
@@ -30,6 +31,7 @@ function App() {
   }, []);
 
   const { isAuthenticated, loading } = useSelector(state => state.user);
+  const { order} = useSelector(state => state.order.order);
 
   return (
     <div>
@@ -47,6 +49,7 @@ function App() {
           <Route exact path="/password/update" element={isAuthenticated ? <UpdatePassword /> : <Forms />} />
           <Route exact path="/password/reset/:token" element={<ResetPassword />} />
           <Route exact path="/cart" element={isAuthenticated ? <Cart /> : <Home />} />
+          <Route exact path="/Shipping" element={isAuthenticated ? <ShippingForm /> : <Forms />} />
         </Routes>
       </BrowserRouter>
 

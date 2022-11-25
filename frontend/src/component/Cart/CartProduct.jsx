@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
-import { ReactNotifications } from 'react-notifications-component';
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { removeItemFromCart } from '../../actions/CartActions';
-import Notification from '../Notification/Notification';
+import { AddToCart, removeItemFromCart } from '../../actions/CartActions';
 import "./Cart.css";
 const CartProduct = ({ item }) => {
     let [qty, setQty] = useState(item.quantity)
@@ -11,11 +9,15 @@ const CartProduct = ({ item }) => {
     const dispatch = useDispatch();
     const removeFromCart = () => {
         dispatch(removeItemFromCart(item.product));
-        Notification("Success", "Item Removed from Cart", "success");
     }
+
+    useEffect(() => {
+        dispatch(AddToCart(item.product, qty));
+
+    }, [qty]);
+
     return (
         <div className="product">
-            <ReactNotifications />
 
             <Link to={`/product/${item.product}`} style={{ "color": "black" }}>
                 <div className="product-image">
@@ -25,7 +27,7 @@ const CartProduct = ({ item }) => {
             <div className="product-details">
                 <div className="product-title">{item.name}</div>
             </div>
-            <div className="product-price">{item.price}</div>
+            <div className="product-price">{item.price * qty}</div>
             <div className="product-quantity">
                 <button className="qtychange" disabled={(qty === 1) ? true : false} id="minus" onClick={() => setQty(qty - 1)}>-</button>
                 <input style={{ width: "20px", margin: "5px" }} type="text" name="" id="" disabled value={qty} />

@@ -73,6 +73,21 @@
   border-bottom: 1px solid #eee;
 }
 
+.card-header {
+  text-align: center;
+  background-color: #000;
+  border-bottom: none;
+  margin-top: 15px;
+  padding: 20px;
+  color: white;
+  border-bottom: 1px solid #f6f7fb;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card-header:first-child {
+  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
 /* Product entries */
 .product {
   margin-bottom: 20px;
