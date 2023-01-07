@@ -56,12 +56,11 @@ exports.getSingleOrder = catchAsyncErrors(async (req, res, next) => {
 
 exports.myOrders = catchAsyncErrors(async (req, res, next) => {
     //finding Order
-    const orders = await Order.find({ userID: req.user.id })
-
+    const myOrders = await Order.find({ userID: req.user.id })
     //Sending Response
     res.status(200).json({
         success: true,
-        orders
+        myOrders
     })
 })
 

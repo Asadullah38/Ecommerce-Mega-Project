@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { clearCart } from '../../actions/CartActions';
 
 const ShippingForm = () => {
-
+    //Defining States
     const [state, setStateName] = useState("")
     const [country, setCountry] = useState("")
     const [pinCode, setPincode] = useState("")
@@ -17,24 +17,33 @@ const ShippingForm = () => {
     const [city, setcity] = useState("")
     const [Address, setAddress] = useState("")
     const [itemsPrice, setItemsPrice] = useState(0)
+
+    //Using dispatch,Navigation and useSelector
     const Navigate = useNavigate();
     const dispatch = useDispatch();
     const { order, loading, error } = useSelector(state => state.order);
     const orderItems = useSelector(state => state.cart.cartItems);
+    
     //Useeffect
     useEffect(() => {
+        //Setting Price
         let subTotal = 0.00;
-        orderItems.map((i) => {
+        orderItems.forEach((i) => {
             subTotal += (i.price * i.quantity);
         })
         setItemsPrice(subTotal);
-
-        if (order.order) {
-            dispatch(clearCart());
-        } else if (error) {
+        //clearing cart
+        if (error) {
             Notification("Error", error, "danger");
+        } else if (order.order) {
+            Notification("Success", "Ordered Successfully", "success");
+            dispatch(clearCart());
+            setTimeout(() => {
+                Navigate("/Cart");
+            }, 2000);
         }
-    }, [loading, error, order])
+        console.log("asd")
+    }, [loading, error, orderItems,order,dispatch,Navigate])
 
     // Order Function
     const SubmitInfo = (e) => {
@@ -62,6 +71,7 @@ const ShippingForm = () => {
             Notification("Error", "Enter Complete Details", "danger")
         } else {
             dispatch(OrderItems(shippingInfo, orderItems, paymentInfo, itemsPrice, taxPrice, shippingPrice, totalPrice));
+
         }
     }
     return (

@@ -1,4 +1,4 @@
-import { ReactNotifications, Store } from 'react-notifications-component'
+import {  Store } from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 // preferred way to import (from `v4`). Uses `animate__` prefix.
 import 'animate.css/animate.min.css';

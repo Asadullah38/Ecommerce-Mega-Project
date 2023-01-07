@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import Product from "../Home/Product";
 import MetaData from '../layout/MetaData';
-import { CgMouse, CgWindows } from "react-icons/cg"
+import { CgMouse } from "react-icons/cg"
 import Pagination, { bootstrap5PaginationPreset } from "react-responsive-pagination";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { clearErrors, getProduct } from '../../actions/productActions';
 import FilterBox from '../Filters/FilterBox.jsx';
 import { ReactNotifications } from 'react-notifications-component'
 import Notification from '../Notification/Notification';
 import Search from "../Search/SearchComponent";
+import EmptyCart from '../Cart/EmptyCart';
 
 
 const ProductsPage = ({ data }) => {
     const dispatch = useDispatch();
-    const { product, error, pageNo, queries, loading } = data;
+    const { product, error, pageNo, queries } = data;
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => {
         setCurrentPage(pageNo);
@@ -23,7 +24,7 @@ const ProductsPage = ({ data }) => {
             }, 10);
             clearErrors();
         }
-    }, [])
+    }, [error, pageNo])
 
 
 
@@ -76,14 +77,14 @@ const ProductsPage = ({ data }) => {
             <div id="rowflex">
 
                 <center>
-                <Search/>
+                    <Search keyword={keyword} setkeyword={setkeyword} />
                     <FilterBox applyFilterAndSearch={applyFilterAndSearch} min={min} max={max} setmin={setmin} setmax={setmax} setRatingsAbove={setRatingsAbove} ratingAbove={ratingAbove} category={category} setCategory={setCategory} />
                 </center>
                 {(product && product.length >= 1) ? <>
                     <div className="container" id="container">
                         {product && product.map((item, key) => { return <Product product={item} key={item._id} /> })}
                     </div>
-                </> : null}
+                </> : <EmptyCart/>}
             </div>
             <Pagination
                 {...bootstrap5PaginationPreset}

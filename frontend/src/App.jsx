@@ -18,6 +18,8 @@ import ForgotPassword from "./component/Password/ForgotPassword";
 import ResetPassword from "./component/Password/ResetPassword";
 import Cart from "./component/Cart/Cart";
 import ShippingForm from "./component/Shipping/ShippingForm";
+import MyOrders from "./component/Orders/MyOrders";
+import OrderDetails from "./component/Orders/OrderDetails";
 
 function App() {
   React.useEffect(() => {
@@ -26,12 +28,10 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
-
     store.dispatch(loadUser());
   }, []);
 
   const { isAuthenticated, loading } = useSelector(state => state.user);
-  const { order} = useSelector(state => state.order.order);
 
   return (
     <div>
@@ -48,8 +48,10 @@ function App() {
           <Route exact path="/UpdateProfile" element={isAuthenticated ? <UpdateProfile /> : <Forms />} />
           <Route exact path="/password/update" element={isAuthenticated ? <UpdatePassword /> : <Forms />} />
           <Route exact path="/password/reset/:token" element={<ResetPassword />} />
-          <Route exact path="/cart" element={isAuthenticated ? <Cart /> : <Home />} />
+          <Route exact path="/cart" element={<Cart />} />
           <Route exact path="/Shipping" element={isAuthenticated ? <ShippingForm /> : <Forms />} />
+          <Route exact path="/Orders" element={isAuthenticated ? <MyOrders /> : <Forms />} />
+          <Route exact path="/MyOrders/:orderID" element={isAuthenticated ? <OrderDetails /> : <Forms />} />
         </Routes>
       </BrowserRouter>
 

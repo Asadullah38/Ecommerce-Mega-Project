@@ -5,19 +5,14 @@ import "./Cart.css";
 import CartProduct from './CartProduct';
 import EmptyCart from './EmptyCart';
 
+
 const Cart = () => {
     const Navigate = useNavigate();
     const cartItems = useSelector(state => state.cart.cartItems);
     let [total, setTotal] = useState(0.00)
-    const { order,loading } = useSelector(state => state.order);
-    useEffect(() => {
-        if (!loading && order.order) {
-            Notification("Success", "Successlly Placed Your Order.", "success");
-        }
-
-
+    useEffect(() => {        
         let subTotal = 0.00;
-        cartItems.map((i) => {
+        cartItems.forEach((i) => {
             subTotal += (i.price * i.quantity);
         })
         setTotal(subTotal);

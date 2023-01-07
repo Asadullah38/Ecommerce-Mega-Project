@@ -13,15 +13,14 @@ const CartProduct = ({ item }) => {
 
     useEffect(() => {
         dispatch(AddToCart(item.product, qty));
-
-    }, [qty]);
+    }, [qty, dispatch, item]);
 
     return (
         <div className="product">
 
             <Link to={`/product/${item.product}`} style={{ "color": "black" }}>
                 <div className="product-image">
-                    <img src={item.image} />
+                    <img src={item.image} alt={item.name}/>
                 </div>
             </Link>
             <div className="product-details">

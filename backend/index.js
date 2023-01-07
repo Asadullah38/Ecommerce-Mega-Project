@@ -1,6 +1,10 @@
 const express = require("express");
 const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, './config/.env') })
+
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require('dotenv').config({ path: path.resolve(__dirname, './config/.env') })
+}
+
 const bodyParser = require("body-parser");
 const app = express();
 const router = require("./router/router");
@@ -22,6 +26,9 @@ process.on("uncaughtException", (err) => {
   });
 });
 
+
+
+
 app.use(router);
 app.use(cors);
 //Error Middleware for Messages
@@ -36,6 +43,6 @@ process.on("unhandledRejection", (err) => {
   });
 });
 
-const server = app.listen(5000, () => {
-  console.log("listening on port", process.env.PORT);
+const server = app.listen(5000 || process.env.PORT, () => {
+  console.log("listening on port");
 });

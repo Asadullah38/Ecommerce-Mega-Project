@@ -31,7 +31,7 @@ router.route("/me/updateProfile").put(isUserAuthenticated, updateProfile);
 
 //Order Routes
 router.route("/order/create").post(isUserAuthenticated,newOrder);
-router.route("/order/myOrders/:id").get(isUserAuthenticated,myOrders);
+router.route("/order/myOrders").get(isUserAuthenticated,myOrders);
 router.route("/order/single/:id").get(isUserAuthenticated,getSingleOrder);
 router.route("/Admin/allOrders").get(isUserAuthenticated,userRoleCheck("Admin"),getOrdersForAdmin);
 router.route("/Admin/updateOrderStatus/:id").put(isUserAuthenticated,userRoleCheck("Admin"),updateOrderStatus);

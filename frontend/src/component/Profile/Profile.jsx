@@ -10,7 +10,7 @@ const Profile = () => {
     const dispatch = useDispatch();
     const { user, loading } = useSelector(state => state.user);
     const { isUpdated } = useSelector(state => state.updatedProfile);
-    const [url, seturl] = useState(user && user.avatar.url)
+    const [url] = useState(user && user.avatar.url)
 
     useEffect(() => {
 

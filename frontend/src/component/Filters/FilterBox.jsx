@@ -3,7 +3,6 @@ import "./filterbox.css";
 import ReactSlider from "react-slider";
 
 const FilterBox = ({ min, max, setmin, setmax, ratingAbove, setRatingsAbove, category, setCategory, applyFilterAndSearch }) => {
-
   const catarray = ["Shoes", "Sports", "Books", "Life"]
   let [filtermode, setfiltermode] = useState(false);
 
@@ -18,7 +17,7 @@ const FilterBox = ({ min, max, setmin, setmax, ratingAbove, setRatingsAbove, cat
           <ReactSlider
             className="price-interval-slider"
             trackClassName='tracker'
-            defaultValue={[min, max]}
+            defaultValue={[Number(min),Number(max)]}
             min={0}
             max={25000}
             step={50}
@@ -65,7 +64,7 @@ const FilterBox = ({ min, max, setmin, setmax, ratingAbove, setRatingsAbove, cat
           <div>
             <h1 id="categoryhead" style={{ padding: "10px", border: "1px solid black", width: "50%", fontFamily: "sans-serif", marginBottom: "30px", }}>Ratings Above</h1>
             <ReactSlider
-              defaultValue={ratingAbove}
+              defaultValue={Number(ratingAbove)}
               className="price-interval-slider"
               trackClassName='tracker'
               min={0}

@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 const DetailsWrapper = () => {
     const dispatch = useDispatch();
     let params = useParams();
-    let [param, setparams] = useState(params);
+    let [param] = useState(params);
     useEffect(() => {
         dispatch(getProductDetails(param.id));
     }, [dispatch, param]);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import "./Navbar.css"
 import { useSelector, useDispatch } from 'react-redux';
 import "../../../../node_modules/bootstrap/dist/css/bootstrap.min.css";

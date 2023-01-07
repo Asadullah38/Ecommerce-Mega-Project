@@ -11,7 +11,7 @@ const Forms = () => {
     const dispatch = useDispatch();
     let [loginpage, setloginpage] = useState(true);
     let userDetails = useSelector(state => state.user);
-    let { error, user, loading, isAuthenticated } = userDetails;
+    let { error,  loading, isAuthenticated } = userDetails;
 
     //Registration States
     let [rEmail, setrEmail] = useState("");
@@ -62,7 +62,7 @@ const Forms = () => {
         if (isAuthenticated) {
             Navigate("/");
         }
-    }, [dispatch, error, isAuthenticated])
+    }, [dispatch, error, isAuthenticated,Navigate])
 
 
     useEffect(() => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./updateProfile.css"
 import { useSelector, useDispatch } from "react-redux";
 import ProfileLogo from "@mui/icons-material/Person"
-import { clearErrors, loadUser, updateProfile } from '../../actions/userActions';
+import { clearErrors, updateProfile } from '../../actions/userActions';
 import Loader from "../layout/Loader.jsx/Loader";
 import Notification from "../Notification/Notification";
 import { ReactNotifications } from "react-notifications-component";
@@ -12,7 +12,7 @@ const UpdateProfile = () => {
     const Navigate = useNavigate();
     const { user } = useSelector(state => state.user);
     const data = useSelector(state => state.updatedProfile);
-    const { updatedProfile, loading, error, isUpdated } = data;
+    const {  loading, error, isUpdated } = data;
     const dispatch = useDispatch();
     let [name, setname] = useState(user && user.name);
     let [avatar, setavatar] = useState("");
@@ -38,7 +38,7 @@ const UpdateProfile = () => {
         else if (!loading && isUpdated) {
             Navigate("/Profile");
         }
-    }, [dispatch, error, isUpdated])
+    }, [dispatch, error, isUpdated,Navigate,loading])
 
 
 
@@ -82,7 +82,7 @@ const UpdateProfile = () => {
                                 </center>
                             </div>
 
-                            <form className="form-horizontal" role="form">
+                            <form className="form-horizontal" >
                                 <div className="form-group mb-2 ">
                                     <label className="col-lg-3 mb-2 mt-2 control-label">Name:</label>
                                     <div className="col-lg-8">

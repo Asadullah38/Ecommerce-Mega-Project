@@ -34,7 +34,6 @@ export const clearCart = () => async (dispatch, getState) => {
 export const removeItemFromCart = (id) => async (dispatch, getState) => {
 
 
-    const config = { Headers: { "Content-Type": "application/json" } }
     dispatch({
         type: REMOVE_ITEM_FROM_CART, payload: id,
     })

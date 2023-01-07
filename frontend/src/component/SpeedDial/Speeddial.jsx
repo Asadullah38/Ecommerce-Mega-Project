@@ -7,23 +7,32 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
 import ProfileIcon from '@mui/icons-material/Person';
 import HomeIcon from '@mui/icons-material/Home';
+import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import CategoryIcon from '@mui/icons-material/Category';
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Speeddial = () => {
     const Navigate = useNavigate();
     const user = useSelector(state => state.user);
     const { isAuthenticated } = user;
     const move = (action) => {
-        if (action !== "Home") {
-            Navigate(action)
-        } else {
+
+        if (action === "Home") {
             Navigate("/")
+        } else if (action === "My Cart") {
+            Navigate("/Cart");
+        } else if (action === "My Orders") {
+            Navigate("/Orders");
+        } else {
+            Navigate(action)
 
         }
     }
     const actions = [
-        { icon: <ShoppingCartIcon />, name: 'Cart' },
+        { icon: <ShoppingCartCheckoutIcon />, name: 'My Orders' },
+        { icon: <ShoppingCartIcon />, name: 'My Cart' },
+        { icon: <CategoryIcon />, name: 'Products' },
         { icon: <HomeIcon />, name: 'Home' },
         isAuthenticated ? { icon: <ProfileIcon />, name: 'Profile' } : { icon: <LoginIcon />, name: 'Login' },
     ];

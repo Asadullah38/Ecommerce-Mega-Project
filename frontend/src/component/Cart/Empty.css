@@ -17,20 +17,6 @@
     box-shadow: 1px 5px 24px 0 rgba(68,102,242,.05);
 }
 
-.card .card-header {
-    text-align: center;
-    background-color: #000;
-    border-bottom: none;
-    padding: 24px;
-    color: white;
-    border-bottom: 1px solid #f6f7fb;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-.card-header:first-child {
-    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
-}
 
 
 

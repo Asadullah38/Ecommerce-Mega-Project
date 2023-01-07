@@ -25,7 +25,7 @@ const LandingPage = ({ data, user }) => {
                 Notification(`Error`, error, 'error')
             }
         }, 1000);
-    }, [])
+    }, [error, isAuthenticated, loadingUser, pageNo, user])
 
 
     // Filter Box States

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from "react-router-dom"
+import {  useParams } from "react-router-dom"
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import "./ProductDetails.css";
@@ -21,10 +21,10 @@ const ProductDetails = ({ product }) => {
     const unit = product.price;
     let [price, setprice] = useState(product.price);
     let [ShowReviews, setShowReviews] = useState(false);
-    let [ratings, setratings] = useState(product.ratings);
+    let [ratings] = useState(product.ratings);
     useEffect(() => {
         setprice(unit * qty);
-    })
+    },[unit,qty])
 
     const showReviews = () => {
         setShowReviews(!ShowReviews);
